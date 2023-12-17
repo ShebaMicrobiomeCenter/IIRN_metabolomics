@@ -1,0 +1,428 @@
+Feature,MA_name,cid,hmdbID,Final_Class
+1-Aminocyclopropanecarboxylate,1-Aminocyclopropanecarboxylic acid,535,HMDB0036458,Organic acids_Amino acids
+1-Methyladenosine,1-Methyladenosine,27476,HMDB0003331,Nucleosides
+10-HAD,10-hydroxy-2E-decenoic acid,5312738,HMDB0244269,Organic acids_Hydroxy and Keto acids
+10-Hydroxydecanoic acid,10-hydroxy capric acid,74300,HMDB0244272,Organic acids_Hydroxy and Keto acids
+"13Z,16Z-docosadienoic acid",Docosadienoate (22:2n6),5312554,HMDB0061714,Lipids_Fatty acids
+14-Methylhexadecanoic acid,(S)-14-Methylhexadecanoic acid,22207,HMDB0031067,Lipids_Fatty acids
+2 Deoxy D Glucose,2-Deoxyglucose,108223,HMDB0062477,Lipids_Other
+2-Acetamido-2-Deoxy-Beta-D-Glucosylamine,N-Acetyl-b-glucosaminylamine,439454,HMDB0001104,Organic oxygen compounds_Carbohydrates
+2-Aminoisobutyrate,2-Aminoisobutyric acid,6119,HMDB0001906,Organic acids_Amino acids
+2-Aminophenol,2-Aminophenol,5801,NA,Benzenoids
+2-Deoxy-D-Glucose 6-phosphate,2-Deoxy-D-glucose 6-phosphate,440992,HMDB0245098,Organic oxygen compounds_Carbohydrates
+2-Hydroxy-4-(Methylthio)Butyric Acid,(+/-)-2-Hydroxy-4-(methylthio)butanoic acid,NA,HMDB0037115,Lipids_Fatty acids
+2-hydroxyglutarate,2-Hydroxyglutarate,43,HMDB0059655,Organic acids_Hydroxy and Keto acids
+2-Hydroxyhexadecanoic acid,(R)-2-Hydroxyhexadecanoic acid,92836,HMDB0031057,Lipids_Fatty acids
+2-Hydroxyisocaproic acid,Leucinic acid,92779,HMDB0000665,Lipids_Fatty acids
+2-Hydroxypyridine,2-Hydroxypyridine,8871,HMDB0013751,Organoheterocyclic compounds_Purine/Pyridines/Pyrimidines
+2-Hydroxytetradecanoic acid,2-Hydroxymyristic acid,1563,HMDB0002261,Lipids_Fatty acids
+2-Methylcitrate,2-Methylcitric acid,515,HMDB0000379,Organic acids and derivatives_Carboxylic acids
+2-Methylmaleate,Citraconic acid,643798,HMDB0000634,Lipids_Fatty acids
+2-Phosphoglycerate,2-Phosphoglyceric acid,59,HMDB0000362,Organic oxygen compounds_Carbohydrates
+"2,3-Dihydroxybenzoate",2-Pyrocatechuic acid,54675818,HMDB0000397,Benzenoids
+"2,4-Dihydroxypteridine",Lumazine,10250,HMDB0254198,Other
+"2,6-Dihydroxypyridine","2,6-Dihydroxypyridine",69371,NA,Organoheterocyclic compounds_Purine/Pyridines/Pyrimidines
+2'-Deoxy-5'-Adenosine Monophosphate,Deoxyadenosine monophosphate,12599,HMDB0000905,Nucleosides
+3 Hydroxybenzyl Alcohol,3-Hydroxybenzyl alcohol,102,HMDB0059712,Benzenoids
+3-(2-Hydroxyphenyl)Propanoate,3-(2-Hydroxyphenyl)propanoic acid,873,HMDB0033752,Other
+3-(4-Hydroxyphenyl)Pyruvate,4-Hydroxyphenylpyruvic acid,6971070,HMDB0000707,Benzenoids
+3-Amino-4-Hydroxybenzoate,3-Amino-4-hydroxybenzoate,65083,HMDB0304941,Benzenoids
+3-Amino-5-Hydroxybenzoate,3-Amino-5-hydroxybenzoate,127115,HMDB0304942,Benzenoids
+3-Dehydroshikimate,3-Dehydroshikimate,439774,HMDB0304122,Other
+3-Hydroxyanthranilate,3-Hydroxyanthranilic acid,86,HMDB0001476,Benzenoids
+3-Hydroxybenzaldehyde,3-Hydroxybenzaldehyde,101,NA,Benzenoids
+3-hydroxybutyric acid,3-Hydroxybutyric acid,441,HMDB0000011,Organic acids_Hydroxy and Keto acids
+3-Hydroxykynurenine,Hydroxykynurenine,89,HMDB0000732,Other
+3-Hydroxymethylglutarate,3-Hydroxymethylglutaric acid,1662,HMDB0000355,Lipids_Fatty acids
+3-Hydroxyoctanoic acid,3-Hydroxyoctanoic acid,26613,HMDB0001954,Organic acids_Hydroxy and Keto acids
+3-Methoxy-4-Hydroxymandelate,Vanillylmandelic acid,1245,HMDB0000291,Benzenoids
+3-Methoxytyramine,3-Methoxytyramine,1669,HMDB0000022,Benzenoids
+3-Methoxytyrosine,3-Methoxytyrosine,1670,HMDB0001434,Organic acids_Amino acids
+3-Methyl-2-Oxindole,3-Methyldioxyindole,150923,HMDB0004186,Organoheterocyclic compounds_Indoles
+3-Methyl-2-Oxovalerate,3-Methyl-2-oxovaleric acid,4298878,HMDB0000491,Organic acids_Hydroxy and Keto acids
+3-Methyl-L-Histidine,3-Methylhistidine,64969,HMDB0000479,Organic acids_Amino acids
+3-Methyladenine,3-Methyladenine,135398661,HMDB0011600,Organoheterocyclic compounds_Purine/Pyridines/Pyrimidines
+3-Methylglutaconate,3-Methylglutaconic acid,1551552,HMDB0000522,Lipids_Fatty acids
+3-Sulfinoalanine,3-Sulfinoalanine,1549098,HMDB0000996,Organic acids_Amino acids
+"3,4 Dihydroxymandelate",dihydroxymandelic acid,85782,HMDB0001866,Benzenoids
+"3,4-Dihydroxybenzoate",Protocatechuic acid,54675866,HMDB0001856,Benzenoids
+"3,4-Dihydroxyphenylglycol","3,4-Dihydroxyphenylglycol",91528,HMDB0000318,Benzenoids
+4-Acetamidobutanoate,4-Acetamidobutanoic acid,18189,HMDB0003681,Organic acids_Amino acids
+4-Aminobenzoate,p-Aminobenzoic acid,978,HMDB0001392,Benzenoids
+4-Coumarate,4-Hydroxycinnamic acid,637542,HMDB0002035,Other
+4-Guanidinobutanoate,4-Guanidinobutanoic acid,500,HMDB0003464,Organic acids_Amino acids
+4-Hydroxy-L-Phenylglycine,4-Hydroxyphenylglycine,36143,HMDB0244973,Organic acids_Amino acids
+4-Hydroxybenzaldehyde,4-Hydroxybenzaldehyde,126,HMDB0011718,Other
+4-Hydroxybenzoate,4-Hydroxybenzoic acid,54675830,HMDB0000500,Benzenoids
+4-Imidazoleacetate,Imidazoleacetic acid,96215,HMDB0002024,Other
+4-Pyridoxate,4-Pyridoxic acid,6723,HMDB0000017,Organoheterocyclic compounds_Purine/Pyridines/Pyrimidines
+5-Aminolevulinic acid,5-Aminolevulinic acid,137,HMDB0001149,Organic acids_Amino acids
+5-Aminopentanoate,5-Aminopentanoic acid,138,HMDB0003355,Organic acids_Amino acids
+5-Hydroxylysine,procollagen 5-hydroxy-L-lysine,3032849,HMDB0000450,Organic acids_Amino acids
+5-Hydroxymethyluracil,5-Hydroxymethyluracil,78168,HMDB0000469,Organoheterocyclic compounds_Purine/Pyridines/Pyrimidines
+5-Methylcytosine,5-Methylcytosine,65040,HMDB0002894,Organoheterocyclic compounds_Purine/Pyridines/Pyrimidines
+5-Valerolactone,delta-Valerolactone,10953,HMDB0250981,Other
+"5,6 Dimethylbenzimidazole",Dimethylbenzimidazole,675,HMDB0003701,Other
+5-Deoxyadenosine,5'-Deoxyadenosine,439182,HMDB0001983,Nucleosides
+"5(Z),8(Z),11(Z)-Eicosatrienoic Acid","5,8,11-Eicosatrienoic acid",5312531,HMDB0010378,Lipids_Fatty acids
+6-Carboxyhexanoate,Pimelic acid,385,HMDB0000857,Lipids_Fatty acids
+6-Hydroxynicotinate,6-Hydroxynicotinic acid,72924,HMDB0002658,Organoheterocyclic compounds_Purine/Pyridines/Pyrimidines
+9-Decenoic acid,9-Decenoic acid,61743,HMDB0031003,Lipids_Fatty acids
+Acetaminophen,Acetaminophen,1983,HMDB0001859,Benzenoids
+Acetoacetate,Acetoacetic acid,6971017,HMDB0000060,Organic acids_Hydroxy and Keto acids
+acetyl-carnitine,L-Acetylcarnitine,7045767,HMDB0000201,Lipids_Other
+acetyl-lysine,N-Alpha-acetyllysine,192590,HMDB0000446,Organic acids_Amino acids
+Acetylcholine,Acetylcholine chloride,187,HMDB0000895,Organic nitrogen compounds
+Acetylcysteine,Acetylcysteine,12035,HMDB0001890,Organic acids_Amino acids
+Adenine,Adenine,190,HMDB0000034,Organoheterocyclic compounds_Purine/Pyridines/Pyrimidines
+Adenosine,Adenosine,60961,HMDB0000050,Nucleosides
+Adenosine Diphosphate Ribose,Adenosine diphosphate ribose,192,HMDB0001178,Nucleosides
+Adipate,Adipic acid,200164,HMDB0000448,Lipids_Fatty acids
+ADP,ADP,6022,HMDB0001341,Nucleosides
+Alanine,L-Alanine,5950,HMDB0000161,Organic acids_Amino acids
+Aleuritic acid,Aleuritic acid,10790,NA,Lipids_Fatty acids
+"all-cis-4,7,10,13,16-Docosapentaenoic acid",Docosapentaenoic acid (22n-6),6441454,HMDB0001976,Lipids_Fatty acids
+Allothreonine,L-Allothreonine,99289,HMDB0004041,Organic acids_Amino acids
+Alpha-Tocopherol,Alpha-Tocopherol,14985,HMDB0001893,Lipids_Other
+aminoadipate,Aminoadipic acid,92136,HMDB0000510,Organic acids_Amino acids
+AMP,Adenosine monophosphate,6083,HMDB0000045,Nucleosides
+Aniline-2-Sulfonate,2-Aminobenzenesulfonic acid,6926,HMDB0304940,Benzenoids
+Anserine,Anserine,112072,HMDB0000194,Other
+Arachidic acid,Arachidic acid,10467,HMDB0002212,Lipids_Fatty acids
+Arachidonic acid,Arachidonic acid,444899,HMDB0001043,Lipids_Fatty acids
+Arginine,L-Arginine,6322,HMDB0000517,Organic acids_Amino acids
+Argininosuccinate,Argininosuccinic acid,16950,HMDB0000052,Organic acids_Amino acids
+Ascorbic acid,Ascorbic acid,54670067,HMDB0000044,Other
+Asparagine,L-Asparagine,6267,HMDB0000168,Organic acids_Amino acids
+Aspartate,L-Aspartic acid,5960,HMDB0000191,Organic acids_Amino acids
+Azelate,Azelaic acid,2266,HMDB0000784,Lipids_Fatty acids
+Behenic acid,Behenic acid,8215,HMDB0000944,Lipids_Fatty acids
+Benzaldehyde,Benzaldehyde,240,HMDB0006115,Benzenoids
+Benzyl Alcohol,Benzyl alcohol,244,HMDB0003119,Benzenoids
+Benzylamine,Benzylamine,7504,HMDB0033871,Benzenoids
+Beta-Alanine,Beta-Alanine,239,HMDB0000056,Organic acids_Amino acids
+Beta-hydroxyvaleric Acid,3-Hydroxyvaleric acid,107802,HMDB0000531,Lipids_Fatty acids
+Betaine,Betaine,247,HMDB0000043,Organic acids_Amino acids
+Bilirubin,Bilirubin,5280352,HMDB0000054,Other
+Biliverdin,Biliverdin,5280353,HMDB0001008,Other
+Biotin,Biotin,171548,HMDB0000030,Other
+Bis(2-Ethylhexyl)Phthalate,Bis(2-ethylhexyl)phthalate,8343,HMDB0249243,Benzenoids
+Buthionine-sulfoximine,NA,119565,NA,Other
+Butyric acid,Butyric acid,264,HMDB0000039,Lipids_Fatty acids
+Butyryl-carnitine,Butyrylcarnitine,439829,HMDB0002013,Lipids_Other
+Caffeate,Caffeate,689043,HMDB0001964,Other
+Caffeine,Caffeine,2519,HMDB0001847,Organoheterocyclic compounds_Purine/Pyridines/Pyrimidines
+Carnitine,L-Carnitine,288,HMDB0000062,Organic nitrogen compounds
+Carnosine,Carnosine,439224,HMDB0000033,Other
+CDP,CDP,6132,HMDB0001546,Nucleosides
+Cholate,Cholic acid,221493,HMDB0000619,Lipids_Bile acids
+Choline,Choline,305,HMDB0000097,Organic nitrogen compounds
+Cinnamate,Cinnamic acid,5957728,HMDB0000567,Other
+cis-10-Nonadecenoic acid,Nonadeca-10(Z)-enoic acid,5312513,HMDB0013622,Lipids_Fatty acids
+cis-11-Eicosenoic acid,Eicosenoic acid,5282768,HMDB0002231,Lipids_Fatty acids
+Cis-4-Hydroxy-D-Proline,cis-4-Hydroxy-D-proline,440014,HMDB0060460,Organic acids_Amino acids
+cis-5-Dodecenoic acid,5-Dodecenoic acid,5312378,HMDB0000529,Lipids_Fatty acids
+"cis-7,10,13,16-Docosatetraenoic acid",Adrenic acid,5497181,HMDB0002226,Lipids_Fatty acids
+cis-aconitate,cis-Aconitic acid,643757,HMDB0000072,Organic acids and derivatives_Carboxylic acids
+Citramalate,Citramalic acid,1081,HMDB0000426,Lipids_Fatty acids
+Citrate,Citric acid,31348,HMDB0000094,Organic acids and derivatives_Carboxylic acids
+Citrulline,Citrulline,9750,HMDB0000904,Organic acids_Amino acids
+CMP,Cytidine monophosphate,6131,HMDB0000095,Nucleosides
+Cortexolone,Cortexolone,440707,HMDB0000015,Lipids_Other
+Cortisone,Cortisone,222786,HMDB0002802,Lipids_Other
+Creatine,Creatine,586,HMDB0000064,Organic acids_Amino acids
+Creatinine,Creatinine,588,HMDB0000562,Organic acids_Amino acids
+Crotonic acid,But-2-enoic acid,637090,HMDB0010720,Lipids_Fatty acids
+Cys-Gly,Cysteinylglycine,439498,HMDB0000078,Organic acids_Amino acids
+Cystathionine,L-Cystathionine,834,HMDB0000099,Organic acids_Amino acids
+Cysteate,Cysteic acid,25701,HMDB0002757,Organic acids_Amino acids
+Cysteine,L-Cysteine,5862,HMDB0000574,Organic acids_Amino acids
+Cystine,L-Cystine,595,HMDB0000192,Organic acids_Amino acids
+Cytidine,Cytidine,6175,HMDB0000089,Nucleosides
+Cytosine,Cytosine,597,HMDB0000630,Organoheterocyclic compounds_Purine/Pyridines/Pyrimidines
+D-Mannosamine,2-Amino-2-deoxy-D-mannose,440049,NA,Other
+D-Pinitol,D-Pinitol,164619,HMDB0034219,Other
+D-Sedoheptulose,Glucoheptulose,5459879,HMDB0003219,Organic oxygen compounds_Carbohydrates
+Decanoic acid,Capric acid,2969,HMDB0000511,Lipids_Fatty acids
+Dehydroascorbate,L-Dehydroascorbic acid,440667,HMDB0001264,Other
+Deoxycarnitine,4-Trimethylammoniobutanoic acid,725,HMDB0001161,Lipids_Fatty acids
+Deoxycholate,Deoxycholic acid,222528,HMDB0000626,Lipids_Bile acids
+Deoxycytidine,Deoxycytidine,13711,HMDB0000014,Nucleosides
+Deoxycytidine Monophosphate,dCMP,13945,HMDB0001202,Nucleosides
+Deoxyguanosine,Deoxyguanosine,135398592,HMDB0000085,Nucleosides
+Deoxyguanosine monophosphate,2'-Deoxyguanosine 5'-monophosphate,135398597,HMDB0001044,Nucleosides
+Deoxyribose,Deoxyribose,5460005,HMDB0003224,Organic oxygen compounds_Carbohydrates
+Deoxyuridine,Deoxyuridine,13712,HMDB0000012,Nucleosides
+Dethiobiotin,Dethiobiotin,445027,HMDB0003581,Lipids_Fatty acids
+DHAP,Dihydroxyacetone phosphate,668,HMDB0001473,Organic oxygen compounds_Carbohydrates
+Diaminopimelate,Diaminopimelic acid,5460662,HMDB0001370,Organic acids_Amino acids
+Didecanoyl-Glycerophosphocholine,PC(10:0/10:0),16219892,HMDB0244070,Lipids_Other
+Diethanolamine,Diethanolamine,8113,HMDB0004437,Organic nitrogen compounds
+Diethyl 2-Methyl-3-Oxosuccinate,Diethyl oxalpropionate,97750,HMDB0032306,Organic acids_Hydroxy and Keto acids
+Dihydrobiopterin,Dihydrobiopterin,135398687,HMDB0000038,Other
+Dihydroorotate,"4,5-Dihydroorotic acid",5461056,HMDB0000528,Organic acids_Amino acids
+Dihydrouracil,Dihydrouracil,649,HMDB0000076,Organoheterocyclic compounds_Purine/Pyridines/Pyrimidines
+Dimethylarginine,Dimethylarginine/symmetric dimethyl-L-arginine,10176589,HMDB0251395,Organic acids_Amino acids
+Dimethylglycine,Dimethylglycine,673,HMDB0000092,Organic acids_Amino acids
+Dipalmitoyl-Phosphoethanolamine,PE(16:0/16:0),65109,HMDB0008923,Lipids_Other
+Docosahexaenoic acid,Docosahexaenoic acid,445580,HMDB0002183,Lipids_Fatty acids
+Docosatrienoic Acid,Docosatrienoic acid,5312557,HMDB0002823,Lipids_Fatty acids
+Dodecanoic acid,Dodecanoic acid,3893,HMDB0000638,Lipids_Fatty acids
+Dopamine,Dopamine,681,HMDB0000073,Benzenoids
+Eicosapentaenoic acid,Eicosapentaenoic acid,446284,HMDB0001999,Lipids_Fatty acids
+Epinephrine,Epinephrine,5816,HMDB0000068,Benzenoids
+Erucic acid,Erucic acid,5281116,HMDB0002068,Lipids_Fatty acids
+Farnesyl pyrophosphate,Farnesyl pyrophosphate,445713,HMDB0000961,Lipids_Other
+Ferulate,trans-Ferulic acid,445858,HMDB0000954,Other
+Fructose,D-Fructose,2723872,HMDB0000660,Organic oxygen compounds_Carbohydrates
+Fructose-6-phosphate,Fructose 6-phosphate,69507,HMDB0000124,Organic oxygen compounds_Carbohydrates
+Fumarate,Fumaric acid,5460307,HMDB0000134,Organic acids and derivatives_Carboxylic acids
+GABA,Gamma-Aminobutyric acid,119,HMDB0000112,Organic acids_Amino acids
+Galactarate,Galactaric acid,3037582,HMDB0000639,Organic oxygen compounds_Carbohydrates
+Galactosamine,Galactosamine,24154,HMDB0245095,Organic oxygen compounds_Carbohydrates
+Galactose 1-Phosphate,Galactose 1-phosphate,123912,HMDB0000645,Organic oxygen compounds_Carbohydrates
+Galacturonate,Galacturonic acid,445929,HMDB0002545,Organic oxygen compounds_Carbohydrates
+Gemcitabine,Gemcitabine,60750,HMDB0014584,Nucleosides
+Glucosaminate,2-Amino-2-deoxy-D-gluconate,73563,HMDB0250755,Organic acids_Amino acids
+Glucosamine,Glucosamine,439213,HMDB0001514,Organic oxygen compounds_Carbohydrates
+Glucosamine-6-Phosphate,Glucosamine 6-phosphate,439217,HMDB0001254,Organic oxygen compounds_Carbohydrates
+Glucose,D-Glucose,5793,HMDB0000122,Organic oxygen compounds_Carbohydrates
+Glucose 6-Phosphate,Glucose 6-phosphate,5958,HMDB0001401,Organic oxygen compounds_Carbohydrates
+Glucuronolactone,"D-Glucurono-6,3-lactone",92283,HMDB0006355,Other
+Glutamate,L-Glutamic acid,33032,HMDB0000148,Organic acids_Amino acids
+Glutamine,L-Glutamine,5961,HMDB0000641,Organic acids_Amino acids
+Glutarate,Glutaric acid,743,HMDB0000661,Organic acids and derivatives_Carboxylic acids
+Glutarylcarnitine,Glutarylcarnitine,71317118,HMDB0013130,Lipids_Other
+Glyceraldehyde 3-phosphate,Glyceraldehyde 3-phosphate,729,HMDB0001112,Organic oxygen compounds_Carbohydrates
+Glycerate,Glyceric acid,439194,HMDB0000139,Organic oxygen compounds_Carbohydrates
+Glycerol,Glycerol,753,HMDB0000131,Organic oxygen compounds_Carbohydrates
+Glycerol 3-phosphate,Glycerol 3-phosphate,754,HMDB0000126,Lipids_Other
+Glycerol Myristate,MG(14:0/0:0/0:0),10957631,HMDB0011561,Lipids_Other
+Glycine,Glycine,750,HMDB0000123,Organic acids_Amino acids
+Glycochenodeoxycholate,Chenodeoxycholic acid glycine conjugate,12544,HMDB0000637,Lipids_Bile acids
+Glycocholate,Glycocholic acid,10140,HMDB0000138,Lipids_Bile acids
+Glycolate,Glycolic acid,757,HMDB0000115,Organic acids_Hydroxy and Keto acids
+GMP,Guanosine monophosphate,135398631,HMDB0001397,Nucleosides
+GPP,Geranyl pyrophosphate,445995,HMDB0001285,Lipids_Other
+Guaiacol,Guaiacol,460,HMDB0001398,Benzenoids
+Guanidinoacetate,Guanidoacetic acid,763,HMDB0000128,Organic acids_Amino acids
+Guanidinosuccinic Acid,Guanidinosuccinic acid,439918,HMDB0003157,Organic acids_Amino acids
+Guanine,Guanine,135398634,HMDB0000132,Organoheterocyclic compounds_Purine/Pyridines/Pyrimidines
+Guanosine,Guanosine,135398635,HMDB0000133,Nucleosides
+Gulonolactone,L-Gulonolactone,165105,HMDB0003466,Other
+Heneicosanoic acid,Heneicosanoic acid,16898,HMDB0002345,Lipids_Fatty acids
+Heptanoic acid,Heptanoic acid,8094,HMDB0000666,Lipids_Fatty acids
+Hexanoic acid,Caproic acid,8892,HMDB0000535,Lipids_Fatty acids
+Hexanoyl carnitine,Hexanoylcarnitine,NA,HMDB0000756,Lipids_Other
+Hippurate,Hippuric acid,464,HMDB0000714,Benzenoids
+Histamine,Histamine,774,HMDB0000870,Organic nitrogen compounds
+Histidine,L-Histidine,6274,HMDB0000177,Organic acids_Amino acids
+Homocysteine,Homocysteine,91552,HMDB0000742,Organic acids_Amino acids
+Homoserine,L-Homoserine,779,HMDB0000719,Organic acids_Amino acids
+Hydroquinone,Hydroquinone,785,HMDB0002434,Benzenoids
+Hypotaurine,Hypotaurine,107812,HMDB0000965,Other
+Hypoxanthine,Hypoxanthine,135398638,HMDB0000157,Organoheterocyclic compounds_Purine/Pyridines/Pyrimidines
+Indole-3-Acetamide,1H-Indole-3-acetamide,397,HMDB0029739,Organoheterocyclic compounds_Indoles
+Indole-3-Acetate,Indoleacetic acid,801,HMDB0000197,Organoheterocyclic compounds_Indoles
+Indole-3-Methyl Acetate,Indole-3-methyl acetate,74706,HMDB0029738,Organoheterocyclic compounds_Indoles
+Indole-3-Pyruvate,CMPciliatine,803,HMDB0060067,Organic oxygen compounds_Carbohydrates
+Indoxyl Sulfate,Indoxyl sulfate,10258,HMDB0000682,Other
+Indoxyl-Glucoside,Indican,441564,HMDB0061755,Organic oxygen compounds_Carbohydrates
+Inosine,Inosine,135398641,HMDB0000195,Nucleosides
+Isoleucine,L-Isoleucine,6306,HMDB0000172,Organic acids_Amino acids
+Itaconate,Itaconic acid,811,HMDB0002092,Lipids_Fatty acids
+Kynurenate,Kynurenic acid,3845,HMDB0000715,Other
+Kynurenine,L-Kynurenine,846,HMDB0000684,Other
+L-Cysteic Acid,Cysteic acid,25701,HMDB0002757,Organic acids_Amino acids
+L-Dopa,L-Dopa,6047,HMDB0000181,Organic acids_Amino acids
+Lactose,Lactose,6134,HMDB0041627,Organic oxygen compounds_Carbohydrates
+Lauroylcarnitine,Dodecanoylcarnitine,168381,HMDB0002250,Lipids_Other
+Leucine,L-Leucine,6106,HMDB0000687,Organic acids_Amino acids
+Lignoceric acid,Tetracosanoic acid,11197,HMDB0002003,Lipids_Fatty acids
+Linoleic acid,Linoleic acid,5280450,HMDB0000673,Lipids_Other
+Linolenic acid,Alpha-Linolenic acid,5280934,HMDB0001388,Lipids_Other
+Lithocholate,Isolithocholic acid,9903,HMDB0000717,Lipids_Bile acids
+Lithocholyltaurine,Lithocholyltaurine,439763,HMDB0000722,Lipids_Bile acids
+Lumichrome,Lumichrome,5326566,HMDB0254199,Other
+Lysine,L-Lysine,5962,HMDB0000182,Organic acids_Amino acids
+Malate,L-Malic acid,160434,HMDB0000156,Organic acids_Hydroxy and Keto acids
+Maleamate,Maleamate,5280451,HMDB0254310,Lipids_Fatty acids
+Maleate,Maleic acid,5288227,HMDB0000176,Organic acids and derivatives_Carboxylic acids
+Maleimide,Maleimide,10935,HMDB0254312,Other
+Malonate,Malonic acid,867,HMDB0000691,Organic acids and derivatives_Carboxylic acids
+Mandelate,Mandelic acid,3839223,HMDB0000703,Benzenoids
+Mannitol,Mannitol,6251,HMDB0000765,Organic oxygen compounds_Carbohydrates
+Melatonin,Melatonin,896,HMDB0001389,Organoheterocyclic compounds_Indoles
+Mesaconic acid,Mesaconic acid,638129,HMDB0000749,Lipids_Fatty acids
+Mesoxalate,Mesoxalic acid,10132,HMDB0031522,Organic acids and derivatives_Carboxylic acids
+Methionine,L-Methionine,6137,HMDB0000696,Organic acids_Amino acids
+Methionine Sulfoximine,Methionine sulfoximine,16118,HMDB0029430,Organic acids_Amino acids
+Methyglutarate,Methylglutaric acid,12284,HMDB0000752,Lipids_Fatty acids
+Methyl 4-Aminobutyrate,Methyl 4-aminobutanoate,18614,HMDB0341354,Organic acids_Amino acids
+Methyl Galactoside,Methyl beta-D-glucopyranoside,94214,HMDB0029965,Organic oxygen compounds_Carbohydrates
+Methyl Jasmonate,Methyl jasmonate,5281929,HMDB0036583,Lipids_Other
+Methyl Vanillate,Methyl vanillate,19844,HMDB0240266,Benzenoids
+methyl-lysine,N(2)-Methyl-lysine,7010497,HMDB0240689,Organic acids_Amino acids
+Methylarginine,L-Targinine,132862,HMDB0029416,Organic acids_Amino acids
+Methylguanidine,Methylguanidine,10111,HMDB0001522,Organic nitrogen compounds
+Methylmalonate,Methylmalonic acid,487,HMDB0000202,Organic acids and derivatives_Carboxylic acids
+Methylthioadenosine,5'-Methylthioadenosine,439176,HMDB0001173,Nucleosides
+Mevalolactone,4-Hydroxy-4-methyltetrahydro-2H-pyran-2-one,10428,HMDB0006024,Other
+Mevalonate,Mevalonic acid,439230,HMDB0000227,Lipids_Fatty acids
+Monoethylmalonate,Dimethylmalonic acid,11686,HMDB0002001,Organic acids and derivatives_Carboxylic acids
+Myo-Inositol,myo-Inositol,892,HMDB0000211,Other
+Myristic acid,Myristic acid,11005,HMDB0000806,Lipids_Fatty acids
+Myristoleic acid,Myristoleic acid,5281119,HMDB0002000,Lipids_Fatty acids
+N-Acetyl-L-Aspartic Acid,N-Acetyl-L-aspartic acid,65065,HMDB0000812,Organic acids_Amino acids
+N-Acetyl-L-glutamine,N-Acetylglutamine,182230,HMDB0006029,Organic acids_Amino acids
+N-Acetylalanine,N-Acetyl-L-alanine,88064,HMDB0000766,Organic acids_Amino acids
+N-Acetylasparagine,N-Acetylasparagine,99715,HMDB0006028,Organic acids_Amino acids
+N-Acetylglucosamine,N-Acetyl-D-glucosamine,24139,HMDB0000215,Organic oxygen compounds_Carbohydrates
+N-Acetylglutamate,N-Acetylglutamic acid,70914,HMDB0001138,Organic acids_Amino acids
+N-Acetylglycine,Acetylglycine,10972,HMDB0000532,Organic acids_Amino acids
+N-Acetylleucine,N-Acetylleucine,70912,HMDB0011756,Organic acids_Amino acids
+N-Acetylmethionine,N-Acetyl-L-methionine,448580,HMDB0011745,Organic acids_Amino acids
+N-Acetylneuraminate,N-Acetylneuraminate,439197,HMDB0000230,Organic oxygen compounds_Carbohydrates
+N-Acetylphenylalanine,N-Acetyl-L-phenylalanine,2000,HMDB0000512,Organic acids_Amino acids
+N-Acetylputrescine,N-Acetylputrescine,122356,HMDB0002064,Other
+N-Acetylserine,N-Acetylserine,65249,HMDB0002931,Organic acids_Amino acids
+N-Acetylserotonin,N-Acetylserotonin,903,HMDB0001238,Organoheterocyclic compounds_Indoles
+N-Acetyltryptophan,N-acetyltryptophan,2002,HMDB0013713,Organic acids_Amino acids
+N-Alpha-Acetyllysine,N-Alpha-acetyllysine,192590,HMDB0000446,Organic acids_Amino acids
+N-Butylbenzenesulfonamide,N-Butylbenzenesulfonamide,19241,NA,Other
+N-Carbamoyl-L-aspartate,Ureidosuccinic acid,93072,HMDB0000828,Organic acids_Amino acids
+N-Formyl-L-Methionine,N-Formyl-L-methionine,439750,HMDB0001015,Organic acids_Amino acids
+N-Formylglycine,N-Formylglycine,75606,HMDB0255145,Organic acids_Amino acids
+N-Methylaspartate,N-Methyl-D-aspartic acid,22880,HMDB0002393,Organic acids_Amino acids
+N-Methylglutamate,N-methyl-L-glutamic Acid,439377,HMDB0062660,Organic acids_Amino acids
+N-Methyltryptamine,N-Methyltryptamine,6088,HMDB0004370,Organoheterocyclic compounds_Indoles
+"N,N-Diethyl-P-phenylenediamine",Protein C-terminal S-farnesyl-L-cysteine,7120,HMDB0247663,Organic nitrogen compounds
+N6-(Delta2-Isopentenyl)-Adenine,N6-(delta2-Isopentenyl)-adenine,92180,HMDB0245646,Organoheterocyclic compounds_Purine/Pyridines/Pyrimidines
+NAD+,NAD,5893,HMDB0000902,Nucleosides
+NAPQI,NAPQI,39763,HMDB0060946,Organic nitrogen compounds
+Nervonic acid,Nervonic acid,5281120,HMDB0002368,Lipids_Fatty acids
+Nicotinamide,Niacinamide,936,HMDB0001406,Organoheterocyclic compounds_Purine/Pyridines/Pyrimidines
+Nicotinamide Mononucleotide,Nicotinamide ribotide,14180,HMDB0000229,Nucleosides
+nicotinamide N-oxide,Nicotinamide N-oxide,72661,HMDB0002730,Organoheterocyclic compounds_Purine/Pyridines/Pyrimidines
+Nicotinate,Nicotinic acid,938,HMDB0001488,Organoheterocyclic compounds_Purine/Pyridines/Pyrimidines
+Nicotine,Nicotine,NA,HMDB0001934,Organoheterocyclic compounds_Purine/Pyridines/Pyrimidines
+Nonadecanoic acid,Nonadecanoic acid,12591,HMDB0000772,Lipids_Fatty acids
+Nonanoic acid,Pelargonic acid,8158,HMDB0000847,Lipids_Fatty acids
+Norepinephrine,Norepinephrine,439260,HMDB0000216,Benzenoids
+Normetanephrine,Normetanephrine,1237,HMDB0000819,Benzenoids
+Norvaline,Norvaline,65098,HMDB0013716,Organic acids_Amino acids
+O-Acetylserine,O-Acetylserine,99478,HMDB0003011,Organic acids_Amino acids
+O-Phosphoethanolamine,O-Phosphoethanolamine,1015,HMDB0000224,Other
+O-Succinyl-Homoserine,O-Succinyl-L-homoserine,439406,HMDB0255868,Organic acids_Amino acids
+Octanoic acid,Caprylic acid,379,HMDB0000482,Lipids_Fatty acids
+Octanoyl-carnitine,L-Octanoylcarnitine,21889559  ,HMDB0000791,Lipids_Other
+Oleic acid,Oleic acid,445639,HMDB0000207,Lipids_Fatty acids
+Oleoyl-Glycerol,MG(18:1(9Z)/0:0/0:0),NA,HMDB0011567,Lipids_Other
+Omega-Hydroxydodecanoate,12-Hydroxydodecanoic acid,79034,HMDB0002059,Organic acids_Hydroxy and Keto acids
+Ophthalmate,Ophthalmic acid,7018721,HMDB0005765,Organic acids_Amino acids
+Ornithine,Ornithine,6262,HMDB0000214,Organic acids_Amino acids
+Orotate,Orotic acid,1492348,HMDB0000226,Organoheterocyclic compounds_Purine/Pyridines/Pyrimidines
+Oxalate,Oxalic acid,71081,HMDB0002329,Organic acids and derivatives_Carboxylic acids
+Oxoadipate,Oxoadipic acid,71,HMDB0000225,Organic acids_Hydroxy and Keto acids
+Oxoglutarate,Oxoglutaric acid,51,HMDB0000208,Organic acids_Hydroxy and Keto acids
+Oxoproline,Pyroglutamic acid,7405,HMDB0000267,Organic acids_Amino acids
+Oxypurinol,Oxypurinol,135398752,HMDB0000786,Organoheterocyclic compounds_Purine/Pyridines/Pyrimidines
+P-Octopamine,p-Octopamine,440266,HMDB0004825,Benzenoids
+Palmitic acid,Palmitic acid,985,HMDB0000220,Lipids_Fatty acids
+Palmitoleic acid,Palmitoleic acid,445638,HMDB0003229,Lipids_Fatty acids
+Palmitoyl-carnitine,O-palmitoylcarnitine,461,HMDB0240783,Lipids_Other
+Paraxanthine,Paraxanthine,4687,HMDB0001860,Organoheterocyclic compounds_Purine/Pyridines/Pyrimidines
+Pentadecanoic acid,Pentadecanoic acid,13849,HMDB0000826,Lipids_Fatty acids
+Pentanoate,Valeric acid,114781,HMDB0000892,Lipids_Fatty acids
+PEP,Phosphoenolpyruvic acid,1005,HMDB0000263,Other
+Phenylacetaldehyde,Phenylacetaldehyde,998,HMDB0006236,Benzenoids
+Phenylalanine,L-Phenylalanine,6140,HMDB0000159,Organic acids_Amino acids
+Phenylethanolamine,2-Hydroxyphenethylamine,1000,HMDB0001065,Organic nitrogen compounds
+Phenylpyruvate,Phenylpyruvic acid,997,HMDB0000205,Benzenoids
+Phosphoserine,Phosphoserine,68841,HMDB0000272,Organic acids_Amino acids
+Picolinate,Picolinic acid,6920223,HMDB0002243,Organoheterocyclic compounds_Purine/Pyridines/Pyrimidines
+Pipecolate,Pipecolic acid,849,HMDB0000070,Organic acids_Amino acids
+Pregnenolone Sulfate,Pregnenolone sulfate,105074,HMDB0000774,Lipids_Other
+Proline,L-Proline,145742,HMDB0000162,Organic acids_Amino acids
+Propionyl-carnitine,Propionylcarnitine,188824,HMDB0000824,Lipids_Other
+Protoporphyrin,Protoporphyrin IX,4971,HMDB0000241,Other
+Pterin,Pterin,135398660,HMDB0000802,Other
+Pyrazole,1H-pyrazole,1048,HMDB0256947,Other
+Pyridoxal,Pyridoxal,1050,HMDB0001545,Organoheterocyclic compounds_Purine/Pyridines/Pyrimidines
+Pyridoxine,Pyridoxine,1054,HMDB0000239,Organoheterocyclic compounds_Purine/Pyridines/Pyrimidines
+Pyrocatechol,Pyrocatechol,289,HMDB0000957,Benzenoids
+Pyruvate,Pyruvic acid,107735,HMDB0000243,Organic acids_Hydroxy and Keto acids
+Quinate,Quinic acid,6508,HMDB0003072,Other
+Quinolinate,Quinolinic acid,1066,HMDB0000232,Organoheterocyclic compounds_Purine/Pyridines/Pyrimidines
+Quinoline,Quinoline,7047,HMDB0033731,Other
+Raffinose,Raffinose,439242,HMDB0003213,Organic oxygen compounds_Carbohydrates
+Rhamnose,Rhamnose,25310,HMDB0000849,Organic oxygen compounds_Carbohydrates
+Riboflavin,Riboflavin,493570,HMDB0000244,Other
+Ribose,D-Ribose,10975657,HMDB0000283,Organic oxygen compounds_Carbohydrates
+Ribose phosphate,D-Ribose 5-phosphate,77982,HMDB0001548,Organic oxygen compounds_Carbohydrates
+Ricinoleic acid,Ricinoleic acid,643684,HMDB0034297,Lipids_Fatty acids
+S-Adenosyl-L-methionine,S-Adenosylmethionine,34755,HMDB0001185,Nucleosides
+S-Hexyl-Glutathione,S-Hexyl-glutathione,97536,NA,Other
+Saccharate,Glucaric acid,33037,HMDB0000663,Organic oxygen compounds_Carbohydrates
+SAICAr,SAICAR,160666,HMDB0000797,Nucleosides
+Salicylamide,Salicylamide,5147,HMDB0015687,Benzenoids
+Salicylate,Salicyluric acid,54675850,HMDB0000840,Benzenoids
+Salsolinol,(R)-Salsolinol,91588,HMDB0005199,Other
+Sarcosine,Sarcosine,1088,HMDB0000271,Organic acids_Amino acids
+Sedoheptulose-7-phosphate,D-Sedoheptulose 7-phosphate,165007,HMDB0001068,Organic oxygen compounds_Carbohydrates
+Serine,Serine,NA,HMDB0000187,Organic acids_Amino acids
+Serotonin,Serotonin,5202,HMDB0000259,Organoheterocyclic compounds_Indoles
+Shikimate,Shikimic acid,8742,HMDB0003070,Other
+Sn-Glycero-3-Phosphocholine,Glycerophosphocholine,657272,HMDB0000086,Lipids_Other
+Sorbate,"(2E,4E)-2,4-Hexadienoic acid",1549237,HMDB0029581,Lipids_Fatty acids
+Sphinganine,Sphinganine,91486,HMDB0000269,Organic nitrogen compounds
+Sphingomyelin,SM(d18:1/18:0),7,HMDB0001348,Lipids_Other
+Stachydrine,Stachydrine,115244,HMDB0004827,Organic acids_Amino acids
+Stachyose,Stachyose,439531,HMDB0003553,Organic oxygen compounds_Carbohydrates
+Stearic acid,Stearic acid,5281,HMDB0000827,Lipids_Fatty acids
+Suberate,Suberic acid,5249080,HMDB0000893,Lipids_Fatty acids
+Succinic Acid,Succinic acid,1110,HMDB0000254,Organic acids and derivatives_Carboxylic acids
+Succinyladenosine,Succinyladenosine,20849086,HMDB0000912,Nucleosides
+Sucrose,Sucrose,5988,HMDB0000258,Organic oxygen compounds_Carbohydrates
+Tartrate,Tartaric acid,875,HMDB0000956,Organic oxygen compounds_Carbohydrates
+Taurine,Taurine,1123,HMDB0000251,Other
+Tetradecanoylcarnitine,Tetradecanoylcarnitine,53477791,HMDB0005066,Lipids_Other
+Tetrahydrofolate,Tetrahydrofolic acid,135444742,HMDB0001846,Organoheterocyclic compounds_Purine/Pyridines/Pyrimidines
+Theophylline,Theophylline,2153,HMDB0001889,Organoheterocyclic compounds_Purine/Pyridines/Pyrimidines
+Thiamine,Thiamine,1130,HMDB0000235,Organoheterocyclic compounds_Purine/Pyridines/Pyrimidines
+Thiamine Monophosphate,Thiamine monophosphate,1131,HMDB0002666,Organoheterocyclic compounds_Purine/Pyridines/Pyrimidines
+Thiopurine S-Methylether,6-Mercaptopurine ribonucleoside triphosphate,5778,HMDB0060411,Nucleosides
+Threitol,D-Threitol,169019,HMDB0004136,Organic oxygen compounds_Carbohydrates
+Threonine,L-Threonine,6288,HMDB0000167,Organic acids_Amino acids
+Thymidine,Thymidine,5789,HMDB0000273,Nucleosides
+Thymine,Thymine,1135,HMDB0000262,Organoheterocyclic compounds_Purine/Pyridines/Pyrimidines
+Thyrotropin Releasing Hormone,Thyrotropin releasing hormone,638678,HMDB0060080,Lipids_Other
+TMP,5-Thymidylic acid,9700,HMDB0001227,Nucleosides
+trans-3-Hexenoic acid,Hydrosorbic acid,5282708,HMDB0031501,Lipids_Fatty acids
+Trans-4-Hydroxy-L-Proline,4-Hydroxyproline,5810,HMDB0000725,Organic acids_Amino acids
+"trans,trans-Muconic acid",3-Hexenedioic acid,5356793,HMDB0000393,Lipids_Fatty acids
+Trehalose,Trehalose,7427,HMDB0000975,Organic oxygen compounds_Carbohydrates
+Tricosanoic acid,Tricosanoic acid,17085,HMDB0001160,Lipids_Fatty acids
+Tridecanoic acid,Tridecanoic acid,12530,HMDB0000910,Lipids_Fatty acids
+Trigonelline,Trigonelline,5570,HMDB0000875,Other
+Trimethyllysine,delta-Trimethyllysine,440121,HMDB0001325,Organic acids_Amino acids
+Tryptamine,Tryptamine,1150,HMDB0000303,Organoheterocyclic compounds_Indoles
+Tryptophan,L-Tryptophan,6305,HMDB0000929,Organoheterocyclic compounds_Indoles
+Tryptophanamide,Tryptophanamide,439356,HMDB0013318,Organoheterocyclic compounds_Indoles
+Tyramine,Tyramine,5610,HMDB0000306,Benzenoids
+Tyrosine,L-Tyrosine,6057,HMDB0000158,Organic acids_Amino acids
+UDP,Uridine 5'-diphosphate,6031,HMDB0000295,Nucleosides
+UMP,Uridine 5'-monophosphate,6030,HMDB0000288,Nucleosides
+Undecanoic acid,Undecanoic acid,8180,HMDB0000947,Lipids_Fatty acids
+Uracil,Uracil,1174,HMDB0000300,Organoheterocyclic compounds_Purine/Pyridines/Pyrimidines
+Urate,Uric acid,1175,HMDB0000289,Organoheterocyclic compounds_Purine/Pyridines/Pyrimidines
+Ureidopropionate,Ureidopropionic acid,111,HMDB0000026,Other
+Uridine,Uridine,6029,HMDB0000296,Nucleosides
+Urocanate,Urocanic acid,736715,HMDB0000301,Other
+Valine,L-Valine,6287,HMDB0000883,Organic acids_Amino acids
+Xanthine,Xanthine,1188,HMDB0000292,Organoheterocyclic compounds_Purine/Pyridines/Pyrimidines
+Xanthosine,Xanthosine,64959,HMDB0000299,Nucleosides
+Xanthurenate,Xanthurenic acid,5699,HMDB0000881,Other
+Ximeninic Acid,Ximenynic acid,5312688,HMDB0255892,Lipids_Fatty acids
+Xylitol,Xylitol,6912,HMDB0002917,Organic oxygen compounds_Carbohydrates
+Xylose,D-Xylose,135191,HMDB0000098,Organic oxygen compounds_Carbohydrates
