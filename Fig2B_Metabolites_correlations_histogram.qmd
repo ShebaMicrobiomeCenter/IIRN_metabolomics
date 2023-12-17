@@ -1,0 +1,189 @@
+---
+title: "Metabolites_correlations"
+format: html
+editor: visual
+---
+
+## Quarto
+
+Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+
+## Running Code
+
+When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+
+```{r}
+#| message: false
+
+library (tidyverse)
+library(dplyr)
+library(ggplot2)
+```
+
+You can add options to executable code like this
+
+```{r}
+#| message: false
+#| echo: false
+
+Serum_data <- 
+  "./Datasets/Serum_metabolomics_dataset.csv" |> read_csv()
+Serum_map <- 
+  "./Datasets/Serum_metadata.txt" |> read_tsv()
+
+Stool_data <- 
+ "./Datasets/Stool_metabolomics_dataset.csv" |> read_csv()
+Stool_map <- 
+  "./Datasets/Stool_metadata.txt" |> read_tsv()
+```
+
+The `echo: false` option disables the printing of code (only output is displayed).
+
+```{r}
+#| message: false
+
+Serum_couples <- combn(Serum_map$SampleID, 2) |> 
+  data.frame() |> t() |> as.data.frame()
+Serum_pnid <- Serum_map |> select(SampleID,pn_ID)
+
+Serum_couples <- Serum_couples |> 
+  left_join(Serum_pnid |> rename(V1 = SampleID, pnID1 = pn_ID)) |> 
+  left_join(Serum_pnid |> rename(V2 = SampleID, pnID2 = pn_ID))
+
+Serum_couples <- Serum_couples |> filter(pnID1 == pnID2) |> 
+  rename(SampleID1 = V1, SampleID2 = V2)
+
+
+Stool_couples <- combn(Stool_map$SampleID, 2) |> 
+  data.frame() |> t() |> as.data.frame()
+Stool_pnid <- Stool_map |> select(SampleID,pn_ID)
+
+Stool_couples <- Stool_couples |> 
+  left_join(Stool_pnid |> rename(V1 = SampleID, pnID1 = pn_ID)) |> 
+  left_join(Stool_pnid |> rename(V2 = SampleID, pnID2 = pn_ID))
+
+Stool_couples <- Stool_couples |> filter(pnID1 == pnID2) |> 
+  rename(SampleID1 = V1, SampleID2 = V2)
+
+serum_vs_stool_couples <- 
+  Stool_map |> select(SampleID) |> 
+  mutate(Stool_ID = SampleID) |> 
+  inner_join(Serum_map |> mutate(Serum_ID = SampleID)) |> 
+  select(Stool_ID, Serum_ID)
+
+```
+
+```{r}
+#| message: false
+
+serum_cor <- data.frame(Feature = Serum_data$Feature, Spearman = NA)
+
+for (feature in serum_cor$Feature) {
+  temp1 <- 
+    Serum_data |> filter(Feature == feature) |> t() |> as.data.frame() |> 
+    rename(PA = V1) |> rownames_to_column("SampleID") |> 
+    filter(SampleID != "Feature") |> transform(PA = as.numeric(PA))
+  
+  temp2 <- Serum_couples |> 
+    left_join(temp1 |> rename(SampleID1 = SampleID, PA1 = PA)) |> 
+    left_join(temp1 |> rename(SampleID2 = SampleID, PA2 = PA))
+  
+  serum_cor[(serum_cor$Feature == feature), "Spearman"] <- 
+    cor(temp2$PA1, temp2$PA2, method = "spearman")
+}
+```
+
+```{r}
+#| message: false
+
+stool_cor <- data.frame(Feature = Stool_data$Feature, Spearman = NA)
+
+for (feature in stool_cor$Feature) {
+  temp1 <- 
+    Stool_data |> filter(Feature == feature) |> t() |> as.data.frame() |> 
+    rename(PA = V1) |> rownames_to_column("SampleID") |> 
+    filter(SampleID != "Feature") |> transform(PA = as.numeric(PA))
+  
+  temp2 <- Stool_couples |> 
+    left_join(temp1 |> rename(SampleID1 = SampleID, PA1 = PA)) |> 
+    left_join(temp1 |> rename(SampleID2 = SampleID, PA2 = PA))
+  
+  stool_cor[(stool_cor$Feature == feature), "Spearman"] <- 
+    cor(temp2$PA1, temp2$PA2, method = "spearman")
+}
+
+```
+
+```{r}
+#| message: false
+
+serum_vs_stool_cor <- data.frame(Feature = intersect(Serum_data$Feature, Stool_data$Feature), Spearman = NA)
+
+for (feature in serum_vs_stool_cor$Feature) {
+  serum_temp1 <- 
+    Serum_data |> filter(Feature == feature) |> t() |> as.data.frame() |> 
+    rename(Serum_PA = V1) |> rownames_to_column("Serum_ID") |> 
+    filter(Serum_ID != "Feature") |> 
+    transform(Serum_PA = as.numeric(Serum_PA))
+  
+  stool_temp1 <- 
+    Stool_data |> filter(Feature == feature) |> t() |> as.data.frame() |> 
+    rename(Stool_PA = V1) |> rownames_to_column("Stool_ID") |> 
+    filter(Stool_ID != "Feature") |> transform(Stool_PA = as.numeric(Stool_PA))
+  
+  temp2 <- serum_vs_stool_couples |> 
+    left_join(serum_temp1) |> 
+    left_join(stool_temp1)
+  
+  serum_vs_stool_cor[(serum_vs_stool_cor$Feature == feature), "Spearman"] <- 
+    cor(temp2$Serum_PA, temp2$Stool_PA, method = "spearman",use = "pairwise.complete.obs")
+}
+
+```
+
+```{r}
+#| message: false
+
+all_cor <- 
+  serum_cor |> mutate(sample_type = "Serum vs Serum") |> 
+  rbind(stool_cor |> mutate(sample_type = "Stool vs Stool")) |> 
+  rbind(serum_vs_stool_cor |> mutate(sample_type = "Serum vs Stool"))
+
+```
+
+```{r}
+# "#FDE6B6",,"#F8C7AE","#DFA6E1"
+types_colors <- c("#F9E7AC","#F1C8A8","#DD97E2")
+names(types_colors) <- c("Serum vs Serum","Serum vs Stool","Stool vs Stool")
+
+types_colors <- c("#FFF0AA","#732C7B","#e18942")
+names(types_colors) <- c("Serum vs Serum","Stool vs Stool","Serum vs Stool")
+
+types_colors <- c("#FFF0AA","#8C489F","#e18942")
+names(types_colors) <- c("Serum vs Serum","Stool vs Stool","Serum vs Stool")
+```
+
+```{r}
+
+all_cor |> 
+  ggplot(aes(Spearman, fill = sample_type)) + 
+  geom_density(alpha = 0.84) +
+  geom_linerange(data = all_cor |> group_by(sample_type) |> 
+                   summarise(cor_mean = mean(Spearman)),
+               aes(x=cor_mean, ymin=0, ymax=c(1.8,4,3.2) ,color=sample_type),
+               linetype = c(1,2,2)) +
+  theme_bw() + 
+  scale_fill_manual(values = types_colors) +
+  scale_x_continuous(breaks = seq(from = -1,to = 1,by = .2),
+                     limits = c(-0.9,0.9)) +
+  theme(panel.grid = element_blank(),
+        plot.background = element_blank(),
+        axis.text = element_text(size=12),
+        title = element_text(size = 6),
+        axis.title = element_text(size = 16))
+
+```
+
+```{r}
+ggsave("./R_figures/Metabolites_correlations_density.png", height=3.5, width=5)
+```
