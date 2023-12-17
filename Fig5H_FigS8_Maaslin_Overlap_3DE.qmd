@@ -1,0 +1,240 @@
+---
+title: "Overlap_3DE_Sep2023"
+format: html
+editor: visual
+---
+
+## Quarto
+
+Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+
+## Running Code
+
+When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+
+```{r}
+#| message: false
+library(tidyverse)
+library(ggplot2)
+library(patchwork)
+library(ggside)
+```
+
+You can add options to executable code like this
+
+```{r}
+#| message: false
+#| echo: false
+
+maas_overlap <- function(sample_type){
+  maas_f_path <- "./Maaslin/"
+  maas1_f <- "_maaslin_#1_allDx_v2/"
+  maas2_f <- "_maaslin_#2_CD_onlyDS_v2/"
+  maas4_f <- "_maaslin_#4_IIRNFlare_onlyRemission_v2/"
+  
+  maas1 <- paste0(maas_f_path,sample_type,maas1_f,"all_results.tsv") |> read_tsv() |> 
+    mutate(Type = 'CD vs. Control')
+  maas2 <- paste0(maas_f_path,sample_type,maas2_f,"all_results.tsv") |> read_tsv() |> 
+    mutate(Type = 'Active CD vs.\nRemission')
+  maas4 <- paste0(maas_f_path,sample_type,maas4_f,"all_results.tsv") |> read_tsv() |> 
+    mutate(Type = 'Relapsers vs.\nNon-Relapsers')
+
+  maas <- rbind(maas1, maas2) |> rbind(maas4)
+  maas <- maas |> filter(metadata %in% c('Dx','Disease_Status','IIRN_Flare'))
+
+  sig_mets <- maas |> filter(qval <= 0.25) |> pull(feature) |> unique()
+  maas <- maas |> filter(feature %in% sig_mets)
+
+  mbx_names <- 
+    "./Datasets/Metabolites_hmdb_classification4.csv" |> read_csv() |> 
+    rename(feature = maas_feature)
+
+  maas <- maas |> left_join(mbx_names) |> 
+    select(-feature) |> rename(feature = Feature) |> relocate(feature, .before=1)
+
+  maas$n_up = NA
+  maas$n_dn = NA
+  maas$n_up_sig = NA
+  maas$n_dn_sig = NA
+  maas$coef_sum = NA
+
+  for(i in 1:nrow(maas))
+  {
+    maas$n_up[i] = sum(maas$feature == maas$feature[i] & maas$coef > 0)
+    maas$n_dn[i] = sum(maas$feature == maas$feature[i] & maas$coef < 0)
+    maas$n_up_sig[i] = sum(maas$feature == maas$feature[i] & maas$coef > 0 & maas$qval <=0.25)
+    maas$n_dn_sig[i] = sum(maas$feature == maas$feature[i] & maas$coef < 0 & maas$qval <=0.25)
+    maas$coef_sum[i] = sum( maas$coef[maas$feature == maas$feature[i]] )
+  }
+  
+  maas$Type = factor(maas$Type, 
+                   levels = c('Relapsers vs.\nNon-Relapsers','Active CD vs.\nRemission','CD vs. Control'))
+  maas2 <- maas |> 
+    mutate(sig = ifelse(maas$qval<=.25,1,0),
+           type_num = Type |> as.numeric(),
+           sig_score = sig+type_num)
+
+  temp <- maas |> 
+    select('feature','n_up_sig','n_dn_sig','coef_sum') |> unique()
+  temp <- temp |> 
+    mutate(n_sig = n_up_sig - n_dn_sig)
+  temp <- arrange(temp,n_dn_sig,coef_sum)
+
+  maas$feature <- factor(maas$feature, levels = temp$feature)
+  
+  return(maas)
+}
+
+```
+
+The `echo: false` option disables the printing of code (only output is displayed).
+
+```{r}
+#| message: false
+
+serum_maas <- maas_overlap("Serum") |> mutate(location = 'Serum')
+stool_maas <- maas_overlap("Stool") |> mutate(location = 'Stool')
+
+maas <- rbind(serum_maas,stool_maas)
+maas <- maas |> mutate(feature2 = paste0(location,"_",feature))
+maas <- maas |> filter(n_dn %in%c(0,3))
+
+```
+
+```{r}
+#| message: false
+#| warning: false
+
+temp <- 
+  maas |> 
+  select('feature','feature2','n_up','n_dn','n_up_sig','n_dn_sig','coef_sum','location') |> unique()
+
+temp <- temp |> mutate(sum_n_sig = (n_dn+n_dn_sig)) |> 
+  mutate(sum_n_sig = ifelse(sum_n_sig==0, -1*(n_up+n_up_sig), sum_n_sig))
+
+temp <- temp[rev(order(temp$sum_n_sig)),]
+
+maas$feature2 <- factor(maas$feature2, levels = temp$feature2)
+```
+
+```{r}
+#| message: false
+
+hmdb_class <- 
+  "./Datasets/Metabolites_hmdb_classification4.csv" |> read_csv() |> 
+    rename(feature = Feature)
+  
+maas1 <- maas |> left_join(hmdb_class |> select(feature, Final_Class))
+
+myPalette0 <- "./Datasets/Classes_counts4.csv" |> read_csv()  
+myPalette1 <- myPalette0 |> inner_join(maas1 |> select(Final_Class) |> unique())
+
+myPalette <- myPalette1$Color
+names(myPalette) <- myPalette1$Final_Class
+
+temp1 <- temp |> left_join(hmdb_class |> select(feature, Final_Class))
+
+```
+
+```{r}
+#| message: false
+
+col2 <- 
+  colorRampPalette(rev(c("#67001F","#B2182B","#D6604D","#F4A582","#FDDBC7","#FFFFFF",
+                         "#D1E5F0", "#92C5DE", "#4393C3", "#2166AC", "#053061")))(200)
+
+
+pl <- maas1 |> 
+  ggplot() + 
+  geom_tile(aes(y=Type, x=feature2, fill = coef*-1)) + 
+  geom_xsidepoint(aes(x = feature2, y = 0,
+                      color = Final_Class), shape = 15, size = 2.8, show.legend = F) +
+  geom_point(aes(y=Type, x=feature2, fill = coef*-1, alpha = qval<=0.25), 
+             shape=8, size =0.5, show.legend = F) + 
+  scale_alpha_manual(values = c(0,1)) + 
+  scale_fill_gradientn(colours = col2, limits = c(-3.2,3.2), name = "Coefficient") + 
+  scale_color_manual(values = myPalette, guide = "none") + 
+  facet_grid(~location, scales = 'free', space = 'free') +
+  scale_x_discrete(expand = c(0,0), breaks = temp$feature2, 
+                   labels=temp1$feature) + 
+  scale_y_discrete(expand = c(0,0)) + 
+  ggside(x.pos = "bottom") + 
+  labs(x="", y="", fill="Coefficient") +
+  theme_bw() + 
+  theme(plot.background = element_blank(),
+        strip.background = element_rect(fill = "white"),
+        ggside.panel.scale = .1,
+        strip.text = element_text(size = 12),
+        axis.text.x = element_text(size = 8, angle=90, 
+                                   hjust = 1, vjust=.4),
+        legend.title = element_text(size = 9),
+        legend.text = element_text(size = 8)) 
+
+pl
+```
+
+```{r}
+
+ggsave(filename = "./R_figures/Maaslins_overlap_main.png",
+       width = 15.5, height = 4.6, scale=0.85)
+```
+
+Heatmap of all metabolites that were significant in at least 1 MaAsLin analysis (Fig. S8):
+
+```{r}
+
+maas <- rbind(serum_maas,stool_maas)
+maas <- maas |> mutate(feature2 = paste0(location,"_",feature))
+
+temp <- maas |> 
+  select('feature','feature2','n_up','n_dn','coef_sum','location') |> unique()
+
+temp = temp[order(temp$coef_sum),]
+maas$feature2 <- factor(maas$feature2, levels = temp$feature2)
+```
+
+```{r}
+#| message: false
+
+all_theme <-  theme_bw() + 
+  theme(plot.background = element_blank(),
+  strip.background = element_rect(fill = "white"),
+  strip.text = element_text(size = 11),
+  axis.text.y = element_text(size = 6, angle=0, 
+                             hjust = 1, vjust=.4),
+  axis.text.x = element_text(size = 8),
+  legend.title = element_text(size = 9),
+  legend.text = element_text(size = 8)) 
+  
+
+col2 <- 
+  colorRampPalette(rev(c("#67001F","#B2182B","#D6604D","#F4A582","#FDDBC7","#FFFFFF",
+                         "#D1E5F0", "#92C5DE", "#4393C3", "#2166AC", "#053061")))(200)
+
+
+
+```
+
+```{r}
+
+  maas |> 
+  ggplot(aes(x=Type, y=feature2, fill = coef*-1)) + 
+  geom_tile() + 
+  geom_point(shape=8, aes(alpha = qval<=0.25), 
+             size =0.5, show.legend = F) + 
+  scale_alpha_manual(values = c(0,1)) + 
+  scale_fill_gradientn(colours = col2, limits = c(-3.2,3.2), name = "Coefficient") + 
+  facet_grid(location~., scales = 'free', space = 'free') + 
+  scale_y_discrete(expand = c(0,0), breaks = temp$feature2, 
+                   labels=temp$feature) + 
+  scale_x_discrete(expand = c(0,0)) + 
+  labs(y="", x="", fill="Coefficient") +
+  theme_set(all_theme)
+
+```
+
+```{r}
+
+ggsave(filename = "./R_figures/Maaslins_overlap_all.png",
+       width = 9.8, height = 10.6, scale=0.86)
+```
