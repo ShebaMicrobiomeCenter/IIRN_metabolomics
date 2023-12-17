@@ -1,0 +1,59 @@
+{
+	"image": "mcr.microsoft.com/devcontainers/universal:2",
+	"features": {
+		"ghcr.io/rocker-org/devcontainer-features/r-packages:1": {
+			"installSystemRequirements": true,
+			"packages": "tidyverse,ggpubr,picante,httr,ggside,patchwork,ggsignif,RColorBrewer,circlize,AUC,Maaslin2",
+			"pakVersion": "auto",
+			"additionalRepositories": "rhub = 'https://r-hub.r-universe.dev', jeroen = 'https://jeroen.r-universe.dev'"
+		},
+		"ghcr.io/rocker-org/devcontainer-features/r-rig:1": {
+			"installDevTools": true,
+			"installREnv": true,
+			"installRMarkdown": true,
+			"installJupyterlab": true,
+			"installRadian": true,
+			"installVscDebugger": true,
+			"version": "release",
+			"pakVersion": "auto",
+			"vscodeRSupport": "full",
+			"pandocVersion": "auto"
+		}
+	}, 
+	"customizations": {
+		"vscode": {
+			// Set *default* container specific settings.json values on container create.
+			"settings": {
+				"[python]": {
+					"defaultInterpreterPath": "/opt/conda/bin/python",
+					"editor.defaultFormatter": "ms-python.black-formatter",
+					"editor.formatOnType": true,
+					"editor.formatOnSave": true
+				},
+				"[jupyter]": {
+					"themeMatplotlibPlots": true,
+					"widgetScriptSources": [
+						"unpkg.com",
+						"jsdelivr.com"
+					]
+				},
+				"[r]": {
+					"rterm.linux": "/usr/local/bin/radian",
+					"r.bracketedPaste": true
+				}
+			},
+			// Add the IDs of extensions you want installed when the container is created.
+			"extensions": [
+				"ms-toolsai.jupyter",
+				"ms-python.python",
+				"reditorsupport.r", 
+				"MS-vsliveshare.vsliveshare",
+				"quarto.quarto"
+			]
+		}, 
+		"codespaces": {
+            "openFiles": ["README"]
+        }
+    }
+
+}
