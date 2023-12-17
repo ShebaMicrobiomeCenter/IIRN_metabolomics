@@ -1,0 +1,111 @@
+---
+title: ""
+author: "Rotem & Nina"
+format: html
+---
+  
+```{r}
+#| message= FALSE
+
+library(tidyverse)
+library(ggrepel)
+library(gghighlight)
+```
+
+```{r}
+#| message= FALSE
+
+all_results_stool <- "./Maaslin/Stool_maaslin_#1_allDx_v2/all_results.tsv" |> 
+  read_tsv() |> filter(metadata == "Dx")
+
+all_results_serum <- "./Maaslin/Serum_maaslin_#1_allDx_v2/all_results.tsv" |> 
+  read_tsv() |> filter(metadata == "Dx")
+```
+
+```{r}
+all_results <- 
+  full_join(all_results_serum |> select(feature, coef, qval)
+            , all_results_stool |> select(feature, coef, qval)
+            , by = "feature"
+            , suffix = c(".serum", ".stool"))
+
+filtered_results <- 
+  all_results |> 
+  filter(qval.serum < .25 | qval.stool < .25) |> 
+  mutate(coef.serum = replace_na(coef.serum, 0), 
+         coef.stool = replace_na(coef.stool, 0)) |> 
+  mutate(isna = is.na(qval.serum) | is.na(qval.stool)) |> 
+  mutate(group = paste(sign(coef.serum + .Machine$double.eps), 
+                       sign(coef.stool+ .Machine$double.eps)))
+
+filtered_results <- 
+  filtered_results |> 
+  mutate(CD_Serum_coef = -1*coef.serum,
+         CD_Stool_coef = -1*coef.stool)
+```
+
+```{r}
+#| message= FALSE
+
+source("./Functions/add_hmdb_classification.R")
+data1 <- add_hmdb_classification(filtered_results, classtokeep = "Hydroxy") 
+
+myPalette1 <- hmdb_palette(data1)
+```
+
+```{r}
+#| message= FALSE
+
+data1 <- 
+  data1 |> 
+  mutate(interest=ifelse(
+    (abs(CD_Serum_coef)>0.9|abs(CD_Stool_coef)>1),1,0)
+    ) |> 
+  mutate(interest=ifelse(
+    (Final_Class3=="Other"|Final_Class3=="Nucleosides"),0,interest)
+    )
+
+data1 <- data1 |> mutate(labels = ifelse(interest==1,Feature,""))
+```
+
+
+```{r}
+
+pl <- 
+  data1 |> 
+  ggplot(aes(x = CD_Serum_coef, y = CD_Stool_coef, 
+             label = Feature, color = Final_Class3)) + 
+  geom_point(size = 2) + 
+  theme_bw() +
+  theme(panel.grid = element_blank(), 
+        axis.title = element_text(size=18), 
+        text = element_text(size=12)) +
+  ggrepel::geom_text_repel(data = data1 #|> filter(interest == 1)
+                           , aes(label = labels)
+                           , size = 4, max.iter = 1e5, max.time = 3
+                           , max.overlaps = 30
+                           , point.size = 2, direction = "both"
+                           , min.segment.length = 0.1
+                           , box.padding = 0.8
+                           , point.padding = 0.8
+                           , segment.size = 0.2
+                           , segment.linetype = 4
+                           , force_pull = 0, force = 0.5
+                           , show.legend = FALSE) +
+  geom_hline(yintercept = 0, color = "grey", linetype = 2) +
+  geom_vline(xintercept = 0, color = "grey", linetype = 2) + 
+  scale_colour_manual(values = myPalette1, name = "Classifications") +
+  expand_limits(x =c(-2.5, 2.5)) +
+  labs(x = "Serum metabolites coefficient", 
+       y = "Fecal metabolites coefficient")
+  
+pl
+
+```
+
+
+```{r}
+ggsave("./R_figures/SerumVsStool_Dx_Coef_quadrants.png", pl, 
+       width = 9, height = 7)
+```
+
