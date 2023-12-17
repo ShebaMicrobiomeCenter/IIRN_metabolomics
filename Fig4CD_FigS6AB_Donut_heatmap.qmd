@@ -1,0 +1,252 @@
+---
+title: "Donut_heatmap"
+format: html
+editor: visual
+author: Rotem & Nina
+---
+
+## Quarto
+
+Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+
+## Running Code
+
+When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+
+```{r}
+#| message: false
+
+library(tidyverse)
+library(ggplot2)
+library(ggside)
+library(stringr)
+library(patchwork)
+```
+
+The same code was applied on each type of metabolomics (serum or stool) separately.
+
+```{r}
+#| message: false
+#| echo: false
+
+get_maaslin <- function(sample_type, maaslin_var){
+  general_vars <- c("Fasting","Gender","Age")
+  all_results <- 
+    paste0("./Maaslin/",sample_type,"_maaslin_#2_CD_",maaslin_var,"/all_results.tsv") |> 
+    read_tsv() |> filter(!(metadata %in% general_vars))
+  # all_results$coef <- all_results$coef*-1
+  return(all_results)
+}
+
+process_maaslin <- function(sample_type, only_DS = T){
+  all_results_DS <- get_maaslin(sample_type, "onlyDS_v2")
+  sig_DS <- all_results_DS |> filter(qval < 0.25)
+  
+  all_results_FCP <- get_maaslin(sample_type, "onlyFCPCat_v2")
+  sig_FCP <- all_results_FCP |> filter(qval < 0.25)
+  
+  all_results_CRP <- get_maaslin(sample_type, "onlyCRPCat_v2")
+  sig_CRP <- all_results_CRP |> filter(qval < 0.25)
+  
+  if(sample_type == "Stool"){
+    all_results_DI <- get_maaslin(sample_type, "onlyDI_v2")
+    all_results_DI$coef <- all_results_DI$coef*-1
+    sig_DI <- all_results_DI |> filter(qval < 0.25)
+    
+    all_results_FD <- get_maaslin(sample_type, "onlyFaithpd_v2")
+    all_results_FD$coef <- all_results_FD$coef*-1
+    sig_FD <- all_results_FD |> filter(qval < 0.25)
+  }
+  
+  all_results <- rbind(all_results_DS, all_results_FCP, all_results_CRP)
+  if(sample_type == "Stool"){
+    all_results <- rbind(all_results, all_results_DI, all_results_FD)
+  }
+  all_results <- all_results |> 
+  mutate(metadata = metadata |> 
+           str_replace("Disease_Status","Active CD") |> 
+           str_replace("FCP_Category","FCP > 100") |> 
+           str_replace("CRP_Category","CRP > 5") |> 
+           str_replace("_"," "))
+  
+  sig_features <- rbind(sig_DS, sig_FCP, sig_CRP) 
+  if(sample_type == "Stool"){
+    sig_features <- rbind(sig_features, sig_DI, sig_FD)
+    }
+  sig_features <- sig_features |> select(feature) |> unique() |> pull(feature)
+  
+  all_results <- all_results |> filter(feature %in% sig_features)
+  if(only_DS){
+    all_results <- all_results |> filter(feature %in% sig_DS$feature)
+  }
+  return(all_results)
+}
+```
+
+The `echo: false` option disables the printing of code (only output is displayed).
+
+```{r}
+#| message: false
+
+# sample_type <- "Serum"
+sample_type <- "Stool"
+
+a_alpha <- .25
+hole <- 3
+
+meta_levels <- c('Active CD','CRP > 5','FCP > 100')
+if(sample_type == "Stool"){
+  meta_levels <- c(meta_levels,'Dysbiosis Index', 'Faith pd')
+}
+
+all_results <- process_maaslin(sample_type)
+# all_results <- process_maaslin(sample_type, only_DS = F)
+```
+
+```{r}
+#| message: false
+
+source("./Functions/add_hmdb_classification.R")
+all_results <- add_hmdb_classification(all_results)
+
+nba <- 
+  all_results |> 
+  mutate(metadata = metadata |> as.factor() |> factor(levels = meta_levels), 
+         num.metadata = metadata |> as.numeric() + hole) |>
+  mutate(signif = qval < a_alpha)
+
+y_labels = levels(nba$metadata)
+y_breaks = seq_along(y_labels) + hole
+
+```
+
+```{r}
+#| message: false
+
+temp1 <- nba |> 
+  filter(metadata == "Active CD") |> 
+  mutate(new_order = paste0(sign(coef), Final_Class2))
+
+temp1 <- temp1 |> 
+  arrange(by=new_order) |> 
+  mutate(Feature = factor(Feature, levels=Feature))
+
+nba$Feature <- factor(nba$Feature,temp1$Feature)
+
+myPalette2 <- hmdb_palette(nba)
+```
+
+```{r}
+#| message: false
+
+nba.labs <- subset(nba, metadata==levels(nba$metadata)[nlevels(nba$metadata)])
+nba.labs <- nba.labs[order(nba.labs$Feature),]
+
+nba.labs$ang <- seq(from=(360/nrow(nba.labs))/1.5
+                  , to=(1.5*(360/nrow(nba.labs)))-340
+                  , length.out=nrow(nba.labs))+90
+            
+nba.labs$hjust <- 0
+nba.labs$hjust[which(nba.labs$ang < -90)] <- 1
+nba.labs$ang[which(nba.labs$ang < -90)] <- (180+nba.labs$ang)[which(nba.labs$ang < -90)]
+```
+
+```{r}
+#| message: false
+
+pl_DS <- nba |> 
+  ggplot(aes(fill = coef*-1, x = Feature, y = num.metadata)) + 
+  geom_tile(color = "darkgrey") +
+  ylim(c(0, max(nba$num.metadata) + 3.5)) +
+  scale_fill_gradient2(low="blue", mid = "white", high="red", 
+                       guide="colorbar",na.value="white") + 
+  coord_polar( start = -.3) +
+  geom_point(data = nba.labs, 
+            aes(x = Feature, y = num.metadata + 0.75, 
+                color = Final_Class3), 
+                  size = 1.5, show.legend = FALSE) +
+  geom_text(data = nba.labs, 
+            aes(x = Feature, y = num.metadata + 1, 
+                label = Feature |> str_wrap(width = 30, whitespace_only = FALSE)
+                , lineheight = 0.9  
+                , angle = ang, hjust = hjust),
+            size = ifelse(sample_type == "Stool",2,2.8), 
+            show.legend = FALSE) + #Metabolites names
+  scale_color_manual(values = myPalette2) +
+  geom_text(aes(x= -1, label = metadata), 
+            data = nba[!duplicated(nba$metadata),], 
+            size = ifelse(sample_type == "Stool",3.5,3.2), 
+            vjust = ifelse(sample_type == "Stool",0.5,-0.2), 
+            hjust = ifelse(sample_type == "Stool",1,0.9), 
+            angle = -45) + #Metadata categories
+  scale_x_discrete(expand = c(0.05, 0)) +
+  geom_text(aes(x = Feature, y = num.metadata, label = ifelse(signif, "+","")), 
+            size = 1.15) + 
+  labs(title = sample_type, fill = "Coefficient") +
+  theme_void() +
+  theme(axis.text = element_blank(),
+        axis.title = element_blank(), 
+        legend.position = c(0.51, 0.5),
+        plot.title = element_text(hjust = 0.25, vjust = 0.5, size = 4))
+ pl_DS
+```
+
+```{r}
+#| message: false
+
+if(sample_type == "Stool"){
+  ggsave(filename = paste0("./R_figures/",sample_type, "_donut_DSfeatures.png"), height = 9, width = 9, scale = 0.9, pl_DS)
+} else {
+  ggsave(filename = paste0("./R_figures/",sample_type, "_donut_DSfeatures.png"), height = 7.5, width = 7.5, scale = 0.95, pl_DS)
+}
+```
+
+```{r}
+#| message: false
+
+pl_all <- nba |> 
+  ggplot(aes(fill = coef*-1, x = Feature, y = num.metadata)) + 
+  geom_tile(color = "darkgrey") +
+  ylim(c(0, max(nba$num.metadata) + 3.5)) +
+  scale_fill_gradient2(low="blue", mid = "white", high="red", 
+                       guide="colorbar",na.value="white") + 
+  coord_polar( start = -.3) +
+  geom_point(data = nba.labs, 
+            aes(x = Feature, y = num.metadata + 0.75, 
+                color = Final_Class3), 
+                  size = 1.5, show.legend = FALSE) +
+  geom_text(data = nba.labs, 
+            aes(x = Feature, y = num.metadata + 1, 
+                label = Feature |> str_wrap(width = 30, whitespace_only = FALSE)
+                , lineheight = 0.5
+                , angle = ang, hjust = hjust),
+            size = ifelse(sample_type == "Stool",1.78,2.4), 
+            show.legend = FALSE) + #Metabolites names
+  scale_color_manual(values = myPalette2) +
+  geom_text(aes(x= -1, label = metadata),
+            data = nba[!duplicated(nba$metadata),], 
+            size = ifelse(sample_type == "Stool",3.5,2.95), 
+            vjust = ifelse(sample_type == "Stool",0.5,-0.2), 
+            hjust = ifelse(sample_type == "Stool",1,0.9), 
+            angle = -45) + #Metadata categories
+  scale_x_discrete(expand = c(0.05, 0)) +
+  geom_text(aes(x = Feature, y = num.metadata, label = ifelse(signif, "+","")), 
+            size = 1.15) + 
+  labs(title = sample_type, fill = "Coefficient") +
+  theme_void() +
+  theme(axis.text = element_blank(),
+        axis.title = element_blank(), 
+        legend.position = c(0.51, 0.5),
+        plot.title = element_text(hjust = 0.25, vjust = 0.5, size = 4))
+ pl_all
+```
+
+```{r}
+#| message: false
+
+if(sample_type == "Stool"){
+  ggsave(filename = paste0("./R_figures/",sample_type, "_donut_ALLfeatures.png"), height = 9.8, width = 9.8, scale = 1.1, pl_all)
+} else {
+  ggsave(filename = paste0("./R_figures/",sample_type, "_donut_ALLfeatures.png"), height = 7.5, width = 7.5, scale = 0.95, pl_all)
+}
+```
