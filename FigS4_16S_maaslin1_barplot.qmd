@@ -1,0 +1,65 @@
+---
+title: "16S_MaAsLin_Dx_barplot"
+format: html
+editor: visual
+---
+
+## Quarto
+
+Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+
+## Running Code
+
+When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+
+```{r}
+#| message: false
+
+library(tidyverse)
+library(ggplot2)
+library(scales)
+library(ggside)
+```
+
+You can add options to executable code like this
+
+```{r}
+#| message: false
+
+data <- "./Maaslin/16S_maaslin_#1_allDx_v2/significant_results.tsv" |> read_tsv() |> filter(metadata == "Dx")
+
+taxa <- "./Datasets/16S_dataset.csv" |> read_csv() |> 
+  select(Feature,ASV) |> rename(ASV_name = Feature)
+```
+
+The `echo: false` option disables the printing of code (only output is displayed).
+
+```{r}
+#| message: false
+
+data$CD_signCoef <- -1*sign(data$coef)
+
+data <- data |> rename(ASV = feature) |> inner_join(taxa)
+```
+
+```{r}
+#| message: false
+
+data |> 
+  ggplot(aes(y= fct_reorder(ASV_name, coef), 
+             x= -1*coef, fill = factor(CD_signCoef))) +
+  geom_col(width = .5) +
+  theme_bw() +
+  theme(axis.title.y = element_blank(), axis.ticks.y = element_blank()) +
+  scale_fill_manual(values = c("#00BFC4","#F8766D"), 
+                    labels = c("Lower in CD", "Higher in CD")) +
+  labs(x = "Coefficient", fill = "Dx Coefficient") +
+  facet_grid(CD_signCoef~., space = "free", scales = "free") +
+  ggtitle("16S maaslin #1 results")
+```
+
+```{r}
+#| message: false
+
+ggsave(filename = "./R_figures/16S_maaslin1_Dx_barplot.png")
+```
