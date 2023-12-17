@@ -1,0 +1,98 @@
+---
+title: "Volcano 🌋"
+author: "Rotem & Nina"
+format: html
+---
+
+```{r}
+#| message= FALSE
+
+library(tidyverse)
+library(ggplot2)
+library(ggrepel)
+library(gghighlight)
+
+```
+
+
+```{r}
+#| message= FALSE
+
+# sample_type  <- "Serum"
+sample_type  <- "Stool"
+
+qval_interst <- 0.0098
+if(sample_type == "Stool"){qval_interst = 0.006}
+
+all_results <- paste0('./Maaslin/',sample_type, "_maaslin_#1_allDx_v2/all_results.tsv") |> read_tsv()
+
+all_results <- all_results|> 
+    mutate(interst = ifelse(qval < qval_interst, 1,NA)) |>
+    filter(metadata == "Dx") |>
+    mutate(feature = feature |> str_remove("_.*")) |> 
+    mutate(sig = sign(coef))
+
+```
+
+```{r}
+#| message= FALSE
+
+featurename <- 
+  "./Datasets/Metabolites_hmdb_classification4.csv" |> read_csv() |> 
+  rename(FeatureName = Feature, feature = maas_feature)
+  
+
+all_results2 <- all_results |> left_join(featurename, by='feature')
+
+all_results2 <- all_results2 |> 
+  mutate(interst = ifelse(FeatureName == "N,N-Diethyl-P-phenylenediamine",NA,interst))
+
+```
+
+
+```{r}
+pl <- 
+  all_results2 |> 
+  ggplot(aes(y =-log10(qval), x = -1*coef, color = sig |> factor())) + 
+  geom_point(size = 2.8, alpha = 0.8) + 
+  expand_limits(x = c(-2,2.5)) +
+  gghighlight(qval < .25) +
+  geom_hline(aes(yintercept = -log10(.1)), linetype = 2, alpha = 0.5) +
+  geom_text_repel(data = all_results2 |> filter(interst == 1),
+                  aes(label = FeatureName |> str_wrap(width = 20, whitespace_only=F)), 
+                  color = "black", alpha = 1,
+                  size = 6, segment.size = unit(0.45, "mm"), 
+                  max.overlaps = 24, direction = "both",
+                  min.segment.length = 0, 
+                  segment.color = "darkgrey",
+                  segment.curvature = 0.4,box.padding = 1.6, point.size = 3) +
+  scale_color_manual(values = c("#F8766D","#00BFC4"), 
+                     labels = c("CD", "Control")) +
+  labs(x = "CD Coefficient", color = "", y = "-log10(q-value)") +
+  theme_bw() + 
+  theme(panel.grid = element_blank(), 
+        axis.title = element_text(size=24), 
+        axis.text = element_text(size=18), 
+        legend.text = element_text(size = 20),
+        legend.title = element_blank(),
+        legend.position = c(0.9, 0.1),
+        legend.background = element_blank())
+
+pl
+```
+
+```{r}
+
+ggsave(filename = paste0("./R_figures/",sample_type,"_volcano.png"), 
+       height = 3, width = 4, scale= 1.4)
+
+```
+
+```{r}
+
+# source("~/Dropbox/PhD/R_scripts/R_functions/Save_pptx.R")
+# create_pptx(plot=pl, 
+#             path= paste0("./R_figures/",sample_type,"volacno1.pptx")
+#             ,left = 0.25, top = 0.25, width = 7.5, height = 7.5)
+```
+
