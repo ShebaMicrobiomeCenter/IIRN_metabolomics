@@ -3,7 +3,7 @@
 	"features": {
 		"ghcr.io/rocker-org/devcontainer-features/r-packages:1": {
 			"installSystemRequirements": true,
-			"packages": "tidyverse,ggpubr,ggside,patchwork,ggsignif,RColorBrewer,circlize,AUC,Maaslin2,pROC,hmdbQuery,vegan,gghighlight,ggrepel",
+			"packages": "tidyverse,ggpubr,ggside,patchwork,ggsignif,RColorBrewer,circlize,AUC,Maaslin2,pROC,hmdbQuery,vegan,gghighlight,ggrepel,davidsjoberg/ggsankey",
 			"pakVersion": "auto",
 			"additionalRepositories": "rhub = 'https://r-hub.r-universe.dev', jeroen = 'https://jeroen.r-universe.dev'"
 		},
@@ -48,7 +48,8 @@
 				"ms-python.python",
 				"reditorsupport.r", 
 				"MS-vsliveshare.vsliveshare",
-				"quarto.quarto"
+				"quarto.quarto",
+				"codeium.codeium"
 			]
 		}, 
 		"codespaces": {
