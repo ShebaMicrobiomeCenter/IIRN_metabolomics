@@ -3,7 +3,7 @@
 	"features": {
 		"ghcr.io/rocker-org/devcontainer-features/r-packages:1": {
 			"installSystemRequirements": true,
-			"packages": "tidyverse,ggpubr,ggside,patchwork,ggsignif,RColorBrewer,circlize,AUC,Maaslin2,pROC,hmdbQuery,vegan",
+			"packages": "tidyverse,ggpubr,ggside,patchwork,ggsignif,RColorBrewer,circlize,AUC,Maaslin2,pROC,hmdbQuery,vegan,gghighlight",
 			"pakVersion": "auto",
 			"additionalRepositories": "rhub = 'https://r-hub.r-universe.dev', jeroen = 'https://jeroen.r-universe.dev'"
 		},
