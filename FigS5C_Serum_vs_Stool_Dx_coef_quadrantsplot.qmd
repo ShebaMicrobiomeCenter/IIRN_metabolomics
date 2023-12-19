@@ -15,11 +15,15 @@ library(gghighlight)
 ```{r}
 #| message= FALSE
 
-all_results_stool <- "./Maaslin/Stool_maaslin_#1_allDx_v2/all_results.tsv" |> 
-  read_tsv() |> filter(metadata == "Dx")
+all_results_stool <- 
+  "./Maaslin/Stool_maaslin_#1_allDx_v2/all_results.tsv" |> 
+  read_tsv() |> 
+  filter(metadata == "Dx")
 
-all_results_serum <- "./Maaslin/Serum_maaslin_#1_allDx_v2/all_results.tsv" |> 
-  read_tsv() |> filter(metadata == "Dx")
+all_results_serum <- 
+  "./Maaslin/Serum_maaslin_#1_allDx_v2/all_results.tsv" |> 
+  read_tsv() |> 
+  filter(metadata == "Dx")
 ```
 
 ```{r}
@@ -70,7 +74,6 @@ data1 <- data1 |> mutate(labels = ifelse(interest==1,Feature,""))
 
 
 ```{r}
-
 pl <- 
   data1 |> 
   ggplot(aes(x = CD_Serum_coef, y = CD_Stool_coef, 
@@ -100,7 +103,6 @@ pl <-
        y = "Fecal metabolites coefficient")
   
 pl
-
 ```
 
 

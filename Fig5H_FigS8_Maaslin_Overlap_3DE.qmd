@@ -208,29 +208,30 @@ all_theme <-  theme_bw() +
   
 
 col2 <- 
-  colorRampPalette(rev(c("#67001F","#B2182B","#D6604D","#F4A582","#FDDBC7","#FFFFFF",
-                         "#D1E5F0", "#92C5DE", "#4393C3", "#2166AC", "#053061")))(200)
-
-
-
+  colorRampPalette(rev(c(
+                         "#67001F", "#B2182B", "#D6604D", "#F4A582", 
+                         "#FDDBC7","#FFFFFF", "#D1E5F0", "#92C5DE", 
+                         "#4393C3", "#2166AC", "#053061")
+                       ))(200)
 ```
 
 ```{r}
 
-  maas |> 
-  ggplot(aes(x=Type, y=feature2, fill = coef*-1)) + 
+maas |> 
+  ggplot(aes(x = Type, y = feature2, fill = coef * -1)) + 
   geom_tile() + 
-  geom_point(shape=8, aes(alpha = qval<=0.25), 
-             size =0.5, show.legend = F) + 
-  scale_alpha_manual(values = c(0,1)) + 
-  scale_fill_gradientn(colours = col2, limits = c(-3.2,3.2), name = "Coefficient") + 
-  facet_grid(location~., scales = 'free', space = 'free') + 
+  geom_point(shape = 8, aes(alpha = qval <= 0.25), 
+             size = 0.5, show.legend = F) + 
+  scale_alpha_manual(values = c(0, 1)) + 
+  scale_fill_gradientn(colours = col2
+                     , limits = c(-3.2,3.2)
+                     , name = "Coefficient") + 
+  facet_grid(location ~ ., scales = 'free', space = 'free') + 
   scale_y_discrete(expand = c(0,0), breaks = temp$feature2, 
                    labels=temp$feature) + 
   scale_x_discrete(expand = c(0,0)) + 
   labs(y="", x="", fill="Coefficient") +
   theme_set(all_theme)
-
 ```
 
 ```{r}

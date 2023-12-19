@@ -4,14 +4,6 @@ format: html
 editor: visual
 ---
 
-## Quarto
-
-Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
-
-## Running Code
-
-When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
-
 ```{r}
 #| message: false
 
@@ -27,18 +19,29 @@ library(ggsignif)
 source("./Functions/perm_test.R") # for perm_test function
 
 couples_function <- function(data,map){
-  couples <- combn(map$SampleID, 2) |> data.frame() |> t() |> as.data.frame()
-  couples$coral <- NA
+  couples <- 
+    combn(map$SampleID, 2) |> 
+    data.frame() |> 
+    t() |> 
+    as.data.frame()
+
+couples$coral <- NA
   for (rown in 1:nrow(couples)) {
-    cor2 = cor(data[couples[rown,'V1']], data[couples[rown,'V2']], method = "spearman")
+    cor2 = cor(data[couples[rown,'V1']]
+             , data[couples[rown,'V2']]
+             , method = "spearman")
   couples[rown, 'coral'] <- cor2
   }
   return(couples)
 }
 
 pnID_function <- function(couples, map){
-  map1 <- map |> select(SampleID,pn_ID) |> rename(V1 = SampleID, pnID1 = pn_ID)
-  map2 <- map |> select(SampleID,pn_ID) |> rename(V2 = SampleID, pnID2 = pn_ID)
+  map1 <- map |> 
+          select(SampleID,pn_ID) |> 
+          rename(V1 = SampleID, pnID1 = pn_ID)
+  map2 <- map |> 
+          select(SampleID,pn_ID) |> 
+          rename(V2 = SampleID, pnID2 = pn_ID)
   longcor1 <- couples |> left_join(map1)
   longcor1 <- longcor1 |> left_join(map2)
   
@@ -50,8 +53,6 @@ pnID_function <- function(couples, map){
   return(longcor1)
 }
 ```
-
-You can add options to executable code like this
 
 ```{r}
 #| message: false
@@ -85,22 +86,23 @@ s16_couples <- couples_function(s16_data,s16_map)
 mgx_ecs_couples <- couples_function(mgx_ecs,mgx_map)
 mgx_paths_couples <- couples_function(mgx_paths,mgx_map)
 mgx_species_couples <- couples_function(mgx_species,mgx_map)
-
 ```
 
 ```{r}
 #| message: false
 
-Serum_longcor1 <- pnID_function(Serum_couples,Serum_map) |> mutate(Type = "Serum")
-Stool_longcor1 <- pnID_function(Stool_couples,Stool_map) |> mutate(Type = "Stool")
-s16_longcor1 <- pnID_function(s16_couples,s16_map) |> mutate(Type = "16S")
-mgx_ecs_longcor1 <- pnID_function(mgx_ecs_couples,mgx_map) |> 
-  mutate(Type = "mgx_ecs")
-mgx_paths_longcor1 <- pnID_function(mgx_paths_couples,mgx_map) |> 
-  mutate(Type = "mgx_paths")
-mgx_species_longcor1 <- pnID_function(mgx_species_couples,mgx_map) |> 
-  mutate(Type = "mgx_species")
-
+Serum_longcor1 <- 
+  pnID_function(Serum_couples,Serum_map) |> mutate(Type = "Serum")
+Stool_longcor1 <- 
+  pnID_function(Stool_couples,Stool_map) |> mutate(Type = "Stool")
+s16_longcor1 <- 
+  pnID_function(s16_couples,s16_map) |> mutate(Type = "16S")
+mgx_ecs_longcor1 <- 
+  pnID_function(mgx_ecs_couples,mgx_map) |> mutate(Type = "mgx_ecs")
+mgx_paths_longcor1 <- 
+  pnID_function(mgx_paths_couples,mgx_map) |> mutate(Type = "mgx_paths")
+mgx_species_longcor1 <- 
+  pnID_function(mgx_species_couples,mgx_map) |> mutate(Type = "mgx_species")
 ```
 
 ```{r}
@@ -112,23 +114,37 @@ s16_perm_results <- perm_test(s16_longcor1)
 ecs_perm <- perm_test(mgx_ecs_longcor1)
 paths_perm <- perm_test(mgx_paths_longcor1)
 species_perm <- perm_test(mgx_species_longcor1)
-
 ```
 
 ```{r}
 #| message: false
 
 intra_perm_results1 <- 
-  perm_test(x = Serum_longcor1 |> filter(intrapn == 'Serum_Within') |> select(coral),
-            y = Stool_longcor1 |> filter(intrapn == 'Feces_Within') |> select(coral))
+  perm_test(x = Serum_longcor1 |> 
+                filter(intrapn == 'Serum_Within') |> 
+                select(coral),
+            y = Stool_longcor1 |> 
+                filter(intrapn == 'Feces_Within') |> 
+                select(coral)
+            )
 
 intra_perm_results2 <- 
-  perm_test(x = Stool_longcor1 |> filter(intrapn == 'Feces_Within') |> select(coral),
-            y = s16_longcor1 |> filter(intrapn == '16s_Within') |> select(coral))
+  perm_test(x = Stool_longcor1 |> 
+                filter(intrapn == 'Feces_Within') |> 
+                select(coral),
+            y = s16_longcor1 |> 
+                filter(intrapn == '16s_Within') |> 
+                select(coral)
+            )
 
 inter_perm_results1 <- 
-  perm_test(x = Serum_longcor1 |> filter(intrapn == 'Serum_Across')|> select(coral),
-            y = Stool_longcor1 |> filter(intrapn == 'Feces_Across')|> select(coral))
+  perm_test(x = Serum_longcor1 |> 
+                filter(intrapn == 'Serum_Across')|> 
+                select(coral),
+            y = Stool_longcor1 |> 
+                filter(intrapn == 'Feces_Across')|> 
+                select(coral)
+            )
 
 mean_perm_results1 <- 
   perm_test(x = Serum_longcor1 |> select(coral),
@@ -147,13 +163,14 @@ all_longcor1 <- rbind(Serum_longcor1, Stool_longcor1) |>
   rbind(mgx_paths_longcor1) |> rbind(mgx_species_longcor1)
 
 all_longcor1 <- all_longcor1 |> 
-  mutate(Type = str_replace(Type, "Serum|Stool", paste0(Type,"\nMetabolomics"))) |> 
+  mutate(Type = str_replace(Type, "Serum|Stool"
+                          , paste0(Type,"\nMetabolomics"))) |> 
   mutate(Type = str_replace(Type, "mgx_","MGX\n"))
 
 all_longcor1$Type <- 
-  factor(all_longcor1$Type, levels = c("Serum\nMetabolomics","Stool\nMetabolomics",
-                                       "16S","MGX\nspecies","MGX\necs","MGX\npaths"))
-
+  factor(all_longcor1$Type, 
+         levels = c("Serum\nMetabolomics","Stool\nMetabolomics"
+                    ,"16S","MGX\nspecies","MGX\necs","MGX\npaths"))
 ```
 
 ```{r}
@@ -177,7 +194,8 @@ gnames <-
 
 ```{r}
 
-all_longcor1 |> ggplot(aes(x=type_n, y=coral, fill = intrapn), show.legend = FALSE) + 
+all_longcor1 |> 
+  ggplot(aes(x=type_n, y=coral, fill = intrapn), show.legend = FALSE) + 
   geom_violin(show.legend = FALSE) +
   geom_boxplot(width = .3, show.legend = FALSE) +   
   labs(x = '', y = 'Spearman r') +
@@ -194,7 +212,6 @@ all_longcor1 |> ggplot(aes(x=type_n, y=coral, fill = intrapn), show.legend = FAL
           title = element_text(size = 6),
           axis.title = element_text(size = 16),
           strip.text = element_text(size = 14)) 
-
 ```
 
 ```{r}
@@ -204,5 +221,3 @@ ggsave("./R_figures/pnID_Spearman_correlations_boxplots.png",
        height = 4.4, width = 8.5)
 
 ```
-
-The `echo: false` option disables the printing of code (only output is displayed).

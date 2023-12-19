@@ -5,14 +5,6 @@ editor: visual
 author: Rotem & Nina
 ---
 
-## Quarto
-
-Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
-
-## Running Code
-
-When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
-
 ```{r}
 #| message: false
 
@@ -32,8 +24,10 @@ The same code was applied on each type of metabolomics (serum or stool) separate
 get_maaslin <- function(sample_type, maaslin_var){
   general_vars <- c("Fasting","Gender","Age")
   all_results <- 
-    paste0("./Maaslin/",sample_type,"_maaslin_#2_CD_",maaslin_var,"/all_results.tsv") |> 
-    read_tsv() |> filter(!(metadata %in% general_vars))
+    paste0("./Maaslin/", sample_type, "_maaslin_#2_CD_"
+          , maaslin_var, "/all_results.tsv") |> 
+    read_tsv() |> 
+    filter(!(metadata %in% general_vars))
   # all_results$coef <- all_results$coef*-1
   return(all_results)
 }
@@ -82,8 +76,6 @@ process_maaslin <- function(sample_type, only_DS = T){
   return(all_results)
 }
 ```
-
-The `echo: false` option disables the printing of code (only output is displayed).
 
 ```{r}
 #| message: false
@@ -147,8 +139,10 @@ nba.labs$ang <- seq(from=(360/nrow(nba.labs))/1.5
                   , length.out=nrow(nba.labs))+90
             
 nba.labs$hjust <- 0
-nba.labs$hjust[which(nba.labs$ang < -90)] <- 1
-nba.labs$ang[which(nba.labs$ang < -90)] <- (180+nba.labs$ang)[which(nba.labs$ang < -90)]
+less_than_90 <- which(nba.labs$ang < -90
+nba.labs$hjust[less_than_90] <- 1
+
+nba.labs$ang[less_than_90] <- (180+nba.labs$ang)[less_than_90]
 ```
 
 ```{r}
@@ -167,20 +161,23 @@ pl_DS <- nba |>
                   size = 1.5, show.legend = FALSE) +
   geom_text(data = nba.labs, 
             aes(x = Feature, y = num.metadata + 1, 
-                label = Feature |> str_wrap(width = 30, whitespace_only = FALSE)
-                , lineheight = 0.9  
-                , angle = ang, hjust = hjust),
-            size = ifelse(sample_type == "Stool",2,2.8), 
+                label = Feature |> 
+                        str_wrap(width = 30, whitespace_only = FALSE)
+              , lineheight = 0.9  
+              , angle = ang, hjust = hjust),
+            size = ifelse(sample_type == "Stool", 2 , 2.8), 
             show.legend = FALSE) + #Metabolites names
   scale_color_manual(values = myPalette2) +
   geom_text(aes(x= -1, label = metadata), 
             data = nba[!duplicated(nba$metadata),], 
-            size = ifelse(sample_type == "Stool",3.5,3.2), 
-            vjust = ifelse(sample_type == "Stool",0.5,-0.2), 
-            hjust = ifelse(sample_type == "Stool",1,0.9), 
+            size = ifelse(sample_type == "Stool", 3.5, 3.2), 
+            vjust = ifelse(sample_type == "Stool", 0.5, - 0.2), 
+            hjust = ifelse(sample_type == "Stool", 1 , 0.9), 
             angle = -45) + #Metadata categories
   scale_x_discrete(expand = c(0.05, 0)) +
-  geom_text(aes(x = Feature, y = num.metadata, label = ifelse(signif, "+","")), 
+  geom_text(aes(x = Feature
+              , y = num.metadata
+              , label = ifelse(signif, "+", "")), 
             size = 1.15) + 
   labs(title = sample_type, fill = "Coefficient") +
   theme_void() +
@@ -195,9 +192,13 @@ pl_DS <- nba |>
 #| message: false
 
 if(sample_type == "Stool"){
-  ggsave(filename = paste0("./R_figures/",sample_type, "_donut_DSfeatures.png"), height = 9, width = 9, scale = 0.9, pl_DS)
+  ggsave(filename = 
+                paste0("./R_figures/",sample_type, "_donut_DSfeatures.png")
+                , height = 9, width = 9, scale = 0.9, pl_DS)
 } else {
-  ggsave(filename = paste0("./R_figures/",sample_type, "_donut_DSfeatures.png"), height = 7.5, width = 7.5, scale = 0.95, pl_DS)
+  ggsave(filename = 
+                paste0("./R_figures/",sample_type, "_donut_DSfeatures.png")
+                , height = 7.5, width = 7.5, scale = 0.95, pl_DS)
 }
 ```
 
@@ -209,7 +210,7 @@ pl_all <- nba |>
   geom_tile(color = "darkgrey") +
   ylim(c(0, max(nba$num.metadata) + 3.5)) +
   scale_fill_gradient2(low="blue", mid = "white", high="red", 
-                       guide="colorbar",na.value="white") + 
+                       guide="colorbar",na.value = "white") + 
   coord_polar( start = -.3) +
   geom_point(data = nba.labs, 
             aes(x = Feature, y = num.metadata + 0.75, 
@@ -217,20 +218,23 @@ pl_all <- nba |>
                   size = 1.5, show.legend = FALSE) +
   geom_text(data = nba.labs, 
             aes(x = Feature, y = num.metadata + 1, 
-                label = Feature |> str_wrap(width = 30, whitespace_only = FALSE)
-                , lineheight = 0.5
-                , angle = ang, hjust = hjust),
-            size = ifelse(sample_type == "Stool",1.78,2.4), 
+                label = Feature |> 
+                          str_wrap(width = 30, whitespace_only = FALSE)
+              , lineheight = 0.5
+              , angle = ang, hjust = hjust),
+            size = ifelse(sample_type == "Stool", 1.78, 2.4), 
             show.legend = FALSE) + #Metabolites names
   scale_color_manual(values = myPalette2) +
-  geom_text(aes(x= -1, label = metadata),
+  geom_text(aes(x= - 1, label = metadata),
             data = nba[!duplicated(nba$metadata),], 
-            size = ifelse(sample_type == "Stool",3.5,2.95), 
-            vjust = ifelse(sample_type == "Stool",0.5,-0.2), 
-            hjust = ifelse(sample_type == "Stool",1,0.9), 
+            size = ifelse(sample_type == "Stool", 3.5, 2.95), 
+            vjust = ifelse(sample_type == "Stool", 0.5, - 0.2), 
+            hjust = ifelse(sample_type == "Stool", 1, 0.9), 
             angle = -45) + #Metadata categories
   scale_x_discrete(expand = c(0.05, 0)) +
-  geom_text(aes(x = Feature, y = num.metadata, label = ifelse(signif, "+","")), 
+  geom_text(aes(x = Feature
+              , y = num.metadata
+              , label = ifelse(signif, "+", "")), 
             size = 1.15) + 
   labs(title = sample_type, fill = "Coefficient") +
   theme_void() +
@@ -245,8 +249,12 @@ pl_all <- nba |>
 #| message: false
 
 if(sample_type == "Stool"){
-  ggsave(filename = paste0("./R_figures/",sample_type, "_donut_ALLfeatures.png"), height = 9.8, width = 9.8, scale = 1.1, pl_all)
+  ggsave(filename = 
+            paste0("./R_figures/",sample_type, "_donut_ALLfeatures.png")
+            , height = 9.8, width = 9.8, scale = 1.1, pl_all)
 } else {
-  ggsave(filename = paste0("./R_figures/",sample_type, "_donut_ALLfeatures.png"), height = 7.5, width = 7.5, scale = 0.95, pl_all)
+  ggsave(filename = 
+            paste0("./R_figures/",sample_type, "_donut_ALLfeatures.png")
+            , height = 7.5, width = 7.5, scale = 0.95, pl_all)
 }
 ```

@@ -11,10 +11,10 @@ library(tidyverse)
 library(ggplot2)
 library(ggrepel)
 library(gghighlight)
-
 ```
 
 
+In this script we will create the Volcano plots for the different cohorts. change the commented Stool/Serum line accordingly.
 ```{r}
 #| message= FALSE
 
@@ -22,31 +22,33 @@ library(gghighlight)
 sample_type  <- "Stool"
 
 qval_interst <- 0.0098
-if(sample_type == "Stool"){qval_interst = 0.006}
+if(sample_type == "Stool") {qval_interst = 0.006}
 
-all_results <- paste0('./Maaslin/',sample_type, "_maaslin_#1_allDx_v2/all_results.tsv") |> read_tsv()
+all_results <- 
+  paste0('./Maaslin/',sample_type, "_maaslin_#1_allDx_v2/all_results.tsv") |> read_tsv()
 
 all_results <- all_results|> 
     mutate(interst = ifelse(qval < qval_interst, 1,NA)) |>
     filter(metadata == "Dx") |>
     mutate(feature = feature |> str_remove("_.*")) |> 
     mutate(sig = sign(coef))
-
 ```
 
 ```{r}
 #| message= FALSE
 
 featurename <- 
-  "./Datasets/Metabolites_hmdb_classification4.csv" |> read_csv() |> 
+  "./Datasets/Metabolites_hmdb_classification4.csv" |> 
+  read_csv() |> 
   rename(FeatureName = Feature, feature = maas_feature)
   
 
 all_results2 <- all_results |> left_join(featurename, by='feature')
 
 all_results2 <- all_results2 |> 
-  mutate(interst = ifelse(FeatureName == "N,N-Diethyl-P-phenylenediamine",NA,interst))
-
+  mutate(interst = ifelse(
+                          FeatureName == "N,N-Diethyl-P-phenylenediamine"
+                          , NA, interst))
 ```
 
 
@@ -82,10 +84,8 @@ pl
 ```
 
 ```{r}
-
 ggsave(filename = paste0("./R_figures/",sample_type,"_volcano.png"), 
        height = 3, width = 4, scale= 1.4)
-
 ```
 
 ```{r}

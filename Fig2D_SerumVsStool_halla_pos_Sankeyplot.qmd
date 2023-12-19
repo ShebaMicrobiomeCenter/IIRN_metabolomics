@@ -4,24 +4,13 @@ format: html
 editor: visual
 ---
 
-## Quarto
-
-Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
-
-## Running Code
-
-When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
-
 ```{r}
 #| message: false
 
 library(tidyverse)
 library(ggplot2)
 library(ggsankey)
-
 ```
-
-You can add options to executable code like this
 
 ```{r}
 #| message: false
@@ -32,17 +21,16 @@ type1 <- "Serum"
 type2 <- "Stool"
 
 data1 <- 
-  paste0("./HALLA/",folder_name,"/hallagram_",type1,"_metabolites.csv") |> 
+  paste0("./HALLA/", folder_name, "/hallagram_", type1, "_metabolites.csv") |> 
   read_csv()
 
 data2 <- 
-  paste0("./HALLA/",folder_name,"/hallagram_",type2,"_metabolites.csv") |> 
+  paste0("./HALLA/", folder_name, "/hallagram_", type2, "_metabolites.csv") |> 
   read_csv()
 
 hallagram0 <- 
-  paste0("./HALLA/",folder_name,"/all_associations.txt") |> 
+  paste0("./HALLA/", folder_name, "/all_associations.txt") |> 
   read_tsv()
-
 ```
 
 Filter the HAllA results to include only metabolites in the original Hallagram & only positive correlations:
@@ -52,12 +40,12 @@ Filter the HAllA results to include only metabolites in the original Hallagram &
 
 hallagram <- hallagram0 |> 
   filter(X_features %in% data1$Serum_metabolites) |> 
-  filter(Y_features %in% data2$Stool_metabolites) |> filter(`q-values` < 0.05) |> filter(association > 0)
+  filter(Y_features %in% data2$Stool_metabolites) |> 
+  filter(`q-values` < 0.05) |> 
+  filter(association > 0)
 
 names(hallagram)[1:2] <- c(type1, type2)
 ```
-
-The `echo: false` option disables the printing of code (only output is displayed).
 
 ```{r}
 #| message: false
@@ -69,13 +57,14 @@ filtered_long <-
 
 source("./Functions/add_hmdb_classification.R")
 filtered_long1 <- 
-  add_hmdb_classification(filtered_long |> rename(Feature = node), n_class = 13) |> 
+  add_hmdb_classification(filtered_long |> rename(Feature = node)
+                        , n_class = 13) |> 
   rename(node = Feature)
 
-filtered_long1 <- filtered_long1 |> group_by(x,node) |> 
+filtered_long1 <- filtered_long1 |> group_by(x, node) |> 
   arrange(x,Final_Class3, by_group = TRUE) |> 
-  mutate(node = paste0(x,node),
-         next_node = paste0(next_x,next_node))
+  mutate(node = paste0(x, node),
+         next_node = paste0(next_x, next_node))
 
 filtered_long1$node <- factor(filtered_long1$node, 
                               levels = filtered_long1$node |> unique())
@@ -101,11 +90,13 @@ pl <- filtered_long1 |>
  scale_fill_manual(values = myPalette1) +
   geom_sankey_text(
     data = filtered_long1 |> 
-      mutate(labels = ifelse(x == type1, paste0(labels,"    "),""))
+      mutate(labels = ifelse(x == type1, paste0(labels,"    "), ""))
     , size = 3.5, hjust = 1
     , vjust = 0) +
   geom_sankey_text(data = filtered_long1 |> 
-                     mutate(labels = ifelse(x == type2 ,paste0("   ",labels),""))
+                     mutate(labels = 
+                            ifelse(x == type2 
+                                 , paste0("   ", labels), ""))
                     , size = 3.5, hjust = -0.0
                    , vjust = 0.09) +
   theme_sankey(base_size = 16) + 
