@@ -1,0 +1,30 @@
+
+## install halla
+cd ~/bin
+wget https://files.pythonhosted.org/packages/4f/c1/a5d48566d0b415b38e58a2c6d8b9e9f6d2d20201b489138fc51657ccaca5/HAllA-0.8.20.tar.gz
+tar -xf HAllA-0.8.20.tar.gz
+conda create -n halla python=3.7
+conda activate halla
+conda install -c r rpy2
+cd HAllA-0.8.20
+R
+install.packages('mgcv','foreign')
+python setup.py install
+conda install -c conda-forge importlib-metadata
+conda install numpy
+conda install -c conda-forge tqdm
+conda install -c conda-forge statsmodels
+conda install -c conda-forge anaconda Scikit-learn #sklearn#
+conda install seaborn
+conda install pandas
+pip install halla
+
+## halla run (make sure x.txt and y.txt use the same samples)
+halla \
+      -x x.txt \
+      -y y.txt \
+      -o halla_res \
+      -m spearman \
+      --fdr_alpha 0.25 &
+      
+ (halla) [nina@SBMBIOSRV02 ~]$ halla -x stool_metab_halla_data.txt -y stool_16s_halla_data.txt -o halla_res -m spearman --fdr_alpha 0.25
