@@ -58,7 +58,7 @@ pl <-
   ggplot(aes(y =-log10(qval), x = -1*coef, color = sig |> factor())) + 
   geom_point(size = 2.8, alpha = 0.8) + 
   expand_limits(x = c(-2,2.5)) +
-  gghighlight(qval < .25) +
+  # gghighlight(qval < .25) +
   geom_hline(aes(yintercept = -log10(.1)), linetype = 2, alpha = 0.5) +
   geom_text_repel(data = all_results2 |> filter(interst == 1),
                   aes(label = FeatureName |> str_wrap(width = 20, whitespace_only=F)), 

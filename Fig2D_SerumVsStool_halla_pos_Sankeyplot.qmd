@@ -12,6 +12,8 @@ library(ggplot2)
 library(ggsankey)
 ```
 
+Change the commented Stool/Serum line accordingly to the type of data you want to plot.
+
 ```{r}
 #| message: false
 #| echo: false
