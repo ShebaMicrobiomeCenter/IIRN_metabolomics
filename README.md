@@ -10,6 +10,8 @@ Our results suggest a potential contribution of the microbial and metabolite com
 
 The functions used through the code should all be available under the Functions/ directory.
 Metadata and normalized data files are under the Datasets/ directory.
+MaAsLin analyses results are under the Maaslin/ directory.
+HAllA analyses results are under the HAllA/ directory.
 
 Additional run guides are available as readme.txt files under the appropriate subdirectories,
 as necessary. 
