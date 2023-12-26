@@ -1,6 +1,19 @@
-# Metagenomics pipeline using bioBakery
+########## Metagenomics pipeline using bioBakery
+# change /PATH/TO/RAW, /PATH/TO/OUTPUT and /PATH/TO/REFERENCE/DB accordingly.
 
-# Running kneaddata v0.10.0 on IIRN metagenome files (decontamination and trimming):
+#creating required directories:
+mkdir /PATH/TO/OUTPUT/kneaddata
+mkdir /PATH/TO/OUTPUT/kneaddata/main
+mkdir /PATH/TO/OUTPUT/kneaddata/merged
+mkdir /PATH/TO/OUTPUT/metaphlan
+mkdir /PATH/TO/OUTPUT/metaphlan/main
+mkdir /PATH/TO/OUTPUT/metaphlan/merged
+mkdir /PATH/TO/OUTPUT/humann
+mkdir /PATH/TO/OUTPUT/humann/main
+mkdir /PATH/TO/OUTPUT/humann/merged
+mkdir /PATH/TO/OUTPUT/mkdir/relab
+
+### Running kneaddata v0.10.0 on IIRN metagenome files (decontamination and trimming):
 # The raw samples had each 4 files: 2 paired-end files in two lanes L3 & L4.
 # Each sample was saved in a different directory inside PATH/TO/RAW, so we enter each subdirectoy and go over all the forward files per sample.
 # i=${i##*/}; removes path
@@ -14,11 +27,11 @@ for dir in */; do cd $dir; for i in *_1.fq.gz; do i=${i##*/}; i=${i%%_1.fq.gz}; 
 
 kneaddata_read_count_table --input /PATH/TO/OUTPUT/kneaddata/main --output /PATH/TO/OUTPUT/kneaddata/merged/kneaddata_read_count_table.tsv
 
-combining final fastq files in /PATH/TO/OUTPUT/kneaddata/main:
+# Combining final fastq files in /PATH/TO/OUTPUT/kneaddata/main:
 for f in *L3_paired_1.fastq; do f=${f%%_L3_paired_1.fastq}; for i in ${f}_L[34]_paired_[12].fastq; do cat ${i} >> ${f}.fastq; done; done
 
 
-# Running MetaPhlAn 4.0.0: 
+### Running MetaPhlAn 4.0.0: 
 # We go over all the samples
 cd /PATH/TO/OUTPUT/kneaddata/main
 for f in *L3_paired_1.fastq
@@ -35,7 +48,7 @@ done
 merge_metaphlan_tables.py *_taxonomic_profile.tsv > ../merged/metaphlan_taxonomic_profiles.tsv
 
 
-# Running HUMAnN v3.6:
+### Running HUMAnN v3.6:
 cd /PATH/TO/OUTPUT/kneaddata/main
 
 for f in *L3_paired_1.fastq
@@ -50,7 +63,6 @@ done
 
 # Post processing humann results. 
 humann_join_tables --input /PATH/TO/OUPUT/humann/main/ --output /PATH/TO/OUTPUT/humann/merged/pathabundance.tsv --file_name pathabundance
-
 
 humann_join_tables --input /PATH/TO/OUPUT/humann/main/ --output /PATH/TO/OUPUT/humann/merged/genefamilies.tsv --file_name genefamilies
 
@@ -72,5 +84,5 @@ humann_split_stratified_table -i /PATH/TO/OUPUT/humann/relab/ecs_relab.tsv -o /P
 
 # We used the unstratified results in humann/relab for the functional profiles and metaphlan_taxonomic_profiles.tsv in metaphlan for the taxonomic profile. 
 # For getting the species profile (i.e. just the species rank among the taxonomic profile) go to file creating_metaphlan_species_file_from_taxonomic_profile_for_IIRN.ipynb 
-# You might want to change the sample names to make it less cumbersome for you. 
+# You might want to change the sample names to make it less cumbersome for you also in the humann files. 
 
