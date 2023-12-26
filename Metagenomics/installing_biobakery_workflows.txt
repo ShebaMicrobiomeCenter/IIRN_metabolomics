@@ -1,0 +1,144 @@
+#######################################################################
+# I followed mainly the following tutorial:
+# https://github.com/biobakery/biobakery/wiki/biobakery_workflows
+# Also followed:
+# https://github.com/biobakery/biobakery_workflows
+# Partial documnetation of the errors I have stumbled upon:
+# https://forum.biobakery.org/t/error-installing-wmgx-biobakery-workflows-databases-install-wmgx/2431/3
+
+# Outside the conda environment I created the directory: 
+# biobakery_worfkflow 
+# And subdirectories:
+# input
+# output_data
+# biobakery_workflows_databases [this is automatically created when the databses are downloaded but is created outside biobakery_workflows, I changed it and put it under biobakery_workflows]
+
+# METAPHLAN4.0.0 HUMANN3.6 UPDATE:
+# The following tutorial is mostly good for versions metaphlan and humann 3. 
+# I've updated to versions metaphlan v4.0.0 and humann v3.6 by these guidelines:
+https://forum.biobakery.org/t/announcing-metaphlan-4/3994
+https://forum.biobakery.org/t/announcing-humann-3-6-critical-update/4155
+# I am leaving my comments of installation process for previous versions, because it might help you in the process, as the installation of biobakery tools involve a lot of error and trial.
+
+########################################################################
+# INITIALIZATION
+conda create --name $MY_ENV python=3.7 
+conda activate $MY_ENV
+conda config --add channels defaults
+conda config --add channels bioconda
+conda config --add channels conda-forge
+conda config --add channels biobakery
+conda install -c biobakery biobakery_workflows
+# Obviously $MY_ENV should be changed with a chosen environment name.
+
+# Specific packages' versions
+conda install networkx=1.11
+conda install tbb=2020.2
+conda install diamond== 2.0.15
+
+# Supposedly installing all the required databases:
+biobakery_workflows_databases --install wmgx
+# This command might fail due to inability to download the databases (I'll call this error: ***). 
+# In order to bypass the installation failure try changing the line in the code client.py:
+client.py in "/pita/users/hila/miniconda3/envs/$MY_ENV/lib/python3.7/http/client.py" line 271:
+line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+# to: 
+line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-2")
+# I downloaded the databases separately, due to the installation error above, however, some dbs still required my solution above anyway. 
+# Not all dbs get downloaded using biobakery_workflows_databases --install wmgx, error or not. 
+
+
+########################################################################
+## KNEADDATA
+# https://github.com/biobakery/kneaddata
+# https://github.com/biobakery/biobakery/wiki/kneaddata
+
+# Downloading the database (if ***):
+kneaddata_database --download human_genome bowtie2 ~/biobakery_workflows/biobakery_workflows_databases/kneaddata_db/human_genome_bowtie2
+
+kneaddata_database --download human_transcriptome bowtie2 ~/biobakery_workflows/biobakery_workflows_databases/kneaddata_db/human_transcriptome_bowtie2
+
+wget -P ~/biobakery_workflows/biobakery_workflows_databases/kneaddata_db/ribosomal_RNA_bowtie2 http://huttenhower.sph.harvard.edu/kneadData_databases/SILVA_128_LSUParc_SSUParc_ribosomal_RNA_v0.2.tar.gz
+
+tar -xzvf ~/biobakery_workflows/biobakery_workflows_databases/kneaddata_db/ribosomal_RNA_bowtie2/SILVA_128_LSUParc_SSUParc_ribosomal_RNA_v0.2.tar.gz
+
+# Installing FASTQC:
+https://www.bioinformatics.babraham.ac.uk/projects/download.html#fastqc
+https://raw.githubusercontent.com/s-andrews/FastQC/master/INSTALL.txt
+
+# For version 0.12.0 a line in kneaddata's code needs to be changed:
+edit [trimmomatic_jar=“trimmomatic*” to “trimmomatic.jar”] in python script [~/miniconda3/envs/$ANOTHER_ENV/lib/python3.7/site-packages/kneaddata/config.py]
+see - https://forum.biobakery.org/t/kneaddata-installed-with-conda-is-not-available/4147
+# In general, I suggest avoiding using kneaddata version 0.12.0, version 0.10.0 is better.
+
+########################################################################
+## METAPHLAN
+# https://github.com/biobakery/MetaPhlAn/wiki/MetaPhlAn-3.0
+# https://github.com/biobakery/biobakery/wiki/metaphlan3
+# http://cmprod1.cibio.unitn.it/biobakery3/metaphlan_databases/
+
+# Downloading the database (if ***):
+metaphlan --install --bowtie2db ~/biobakery_workflows/biobakery_worklflows_databases/metaphlan_db/v30
+
+# The database's location should be indicated when running the pipeline when using the command:
+# biobakery_workflows wmgx --taxonomic-profiling-options="--bowtie2db=~/biobakery_workflows/biobakery_workflows_databases/metaphlan_db/v30"
+# Otherwise the code searches the db at: 
+# /pita/users/hila/miniconda3/envs/$MY_ENV/lib/python3.7/site-packages/metaphlan/metaphlan_databases/
+
+# update 29th Nov 2021 - since in the wmgx_wmtx workflow we can't define the location of the metaphlan dataset, I decided to change the code's dataset's default location:
+/pita/users/hila/miniconda3/envs/$MY_ENV/lib/python3.7/site-packages/metaphlan/metaphlan_databases/metaphlan.py:
+metaphlan_database = r'/pita/users/hila//biobakery_workflows/biobakery_workflows_databases/metaphlan_db/v30'
+#DEFAULT_DB_FOLDER = os.path.join(metaphlan_script_install_folder, "metaphlan_databases")
+DEFAULT_DB_FOLDER = metaphlan_database
+
+
+########################################################################
+## HUMANN
+# https://github.com/biobakery/humann
+https://github.com/biobakery/biobakery/wiki/humann3
+http://huttenhower.sph.harvard.edu/humann_data/
+
+# Downloading and indicating the location of the protein database:
+# if ***:
+humann_databases --download uniref uniref90_diamond ~/biobakery_workflows/biobakery_workflows_databases/humann_db/humann3
+humann_config --update database_folders protein ~/biobakery_workflows/biobakery_workflows_databases/humann_db/humann3/uniref/uniref90
+
+humann_databases --download uniref uniref50_diamond ~/biobakery_workflows/biobakery_workflows_databases/humann_db/humann3
+
+# Downloading and indicating the location of the nucleotide database:
+# if *** (this is actually the main db that caused the error **):
+humann_databases --download chocophlan full ~/biobakery_workflows/biobakery_workflows_databases/humann_db/humann3
+humann_config --update database_folders nucleotide ~/biobakery_workflows/biobakery_workflows_databases/humann_db/humann3/chocophlan
+update - for humannv3.1 and above, use:
+humann_config --update database_folders nucleotide ~/biobakery_workflows/biobakery_workflows_databases/humann_db/humann31/chocophlan
+
+# To link Uniref families to lowest common ancestors
+# If ***:
+humann_databases --download utility_mapping full ~/biobakery_workflows/biobakery_workflows_databases/humann_db/humann3/utility_mapping
+humann_config --update database_folders utility_mapping ~/biobakery_workflows/biobakery_workflows_databases/humann_db/humann3/utility_mapping
+
+# For working with sam input files:
+conda install -c bioconda samtools
+
+
+
+########################################################################
+## RUNNING THE WORKFLOW
+# Running the example:
+biobakery_workflows wmgx --input input --output output_data --qc-options="--trimmomatic ~/miniconda3/envs/$MY_ENV/share/trimmomatic-0.39-2/ " --local-jobs 6 --threads 50 --taxonomic-profiling-options="--bowtie2db=~/biobakery_workflows/biobakery_workflows_databases/metaphlan_db/v30" 
+# For some reason using:
+--qc-options="--reference-db ~/biobakery_workflows/biobakery_workflows_databases/kneaddata_db/human_genome_bowtie2" 
+# doesn't work, 
+# "ERROR: Unable to find database KNEADDATA_DB_HUMAN_GENOME."
+# must do:
+export KNEADDATA_DB_HUMAN_GENOME=~/biobakery_workflows/biobakery_workflows_databases/kneaddata_db/human_genome_bowtie2
+
+# If a pair-end sequencing:
+--pair-identifier _R1
+
+# Sometimes running the workflow again solves previous crashes for unknown reason.
+
+# For help with the wmgx workflow use :
+# biobakery_workflows wmgx --help
+
+
