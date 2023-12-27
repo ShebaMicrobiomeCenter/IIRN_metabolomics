@@ -20,7 +20,7 @@ For the code of the multi-omic analysis performed by the Borenstein lab, please 
 GitHub Repository.
 
 Data is publicly available at the following:
-The 16S amplicon sequencing dataset was deposited as BioProject PRJNA1053872.
+The 16S amplicon sequencing dataset was deposited as BioProject PRJNA1057679.
 Microbial shotgun sequencing is available as BioProject XX.
 
 R session info:
