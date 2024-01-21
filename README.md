@@ -17,10 +17,10 @@ Additional run guides are available as readme.txt files under the appropriate su
 as necessary. 
 
 For the code of the multi-omic analysis performed by the Borenstein lab, please visit their
-GitHub Repository.
+GitHub Repository: https://github.com/borenstein-lab/IIRN_multi_omic.
 
 Data is publicly available at the following:
-The 16S amplicon sequencing dataset was deposited as BioProject PRJNA1057679.
-Microbial shotgun sequencing is available as BioProject XX.
+The 16S amplicon sequencing dataset was deposited as BioProject PRJNA1053872.
+Microbial shotgun sequencing is available as BioProject PRJNA1057679.
 
 R session info:
