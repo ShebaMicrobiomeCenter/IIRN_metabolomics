@@ -140,7 +140,7 @@ nba.labs$ang <- seq(from=(360/nrow(nba.labs))/1.5
                   , length.out=nrow(nba.labs))+90
             
 nba.labs$hjust <- 0
-less_than_90 <- which(nba.labs$ang < -90
+less_than_90 <- which(nba.labs$ang < -90)
 nba.labs$hjust[less_than_90] <- 1
 
 nba.labs$ang[less_than_90] <- (180+nba.labs$ang)[less_than_90]
@@ -163,10 +163,10 @@ pl_DS <- nba |>
   geom_text(data = nba.labs, 
             aes(x = Feature, y = num.metadata + 1, 
                 label = Feature |> 
-                        str_wrap(width = 30, whitespace_only = FALSE)
-              , lineheight = 0.9  
+                        str_wrap(width = 27, whitespace_only = FALSE)
+              , lineheight = 0.8  
               , angle = ang, hjust = hjust),
-            size = ifelse(sample_type == "Stool", 2 , 2.8), 
+            size = ifelse(sample_type == "Stool", 2.8 , 2.8), 
             show.legend = FALSE) + #Metabolites names
   scale_color_manual(values = myPalette2) +
   geom_text(aes(x= -1, label = metadata), 
@@ -178,9 +178,9 @@ pl_DS <- nba |>
   scale_x_discrete(expand = c(0.05, 0)) +
   geom_text(aes(x = Feature
               , y = num.metadata
-              , label = ifelse(signif, "+", "")), 
-            size = 1.15) + 
-  labs(title = sample_type, fill = "Coefficient") +
+              , label = ifelse(signif, "•", "")), 
+            size = 2) + 
+  labs(fill = "Coefficient") +
   theme_void() +
   theme(axis.text = element_blank(),
         axis.title = element_blank(), 
