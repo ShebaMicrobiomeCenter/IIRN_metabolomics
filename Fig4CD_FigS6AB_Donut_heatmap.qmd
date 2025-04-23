@@ -81,8 +81,8 @@ Change the commented Stool/Serum line accordingly to the type of data you want t
 ```{r}
 #| message: false
 
-# sample_type <- "Serum"
-sample_type <- "Stool"
+sample_type <- "Serum"
+# sample_type <- "Stool"
 
 a_alpha <- .25
 hole <- 3
@@ -166,7 +166,7 @@ pl_DS <- nba |>
                         str_wrap(width = 27, whitespace_only = FALSE)
               , lineheight = 0.8  
               , angle = ang, hjust = hjust),
-            size = ifelse(sample_type == "Stool", 2.8 , 2.8), 
+            size = ifelse(sample_type == "Stool", 2.8 , 3), 
             show.legend = FALSE) + #Metabolites names
   scale_color_manual(values = myPalette2) +
   geom_text(aes(x= -1, label = metadata), 
